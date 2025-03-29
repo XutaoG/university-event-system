@@ -20,7 +20,7 @@ public class SQLUniversityRepository(IConfiguration configuration) : IUniversity
 			using var transaction = await connection.BeginTransactionAsync();
 
 			// Insert uni into DB
-			var numRowUpdated = await connection.ExecuteAsync("INSERT INTO universities (Name, Location, Description, NumStudents) VALUES (@Name, @Location, @Description, @NumStudents)", university, transaction);
+			var numRowUpdated = await connection.ExecuteAsync("INSERT INTO universities (Name, Location, Description, NumStudents, Domain) VALUES (@Name, @Location, @Description, @NumStudents, @Domain)", university, transaction);
 
 			if (numRowUpdated == 0)
 			{
@@ -47,9 +47,15 @@ public class SQLUniversityRepository(IConfiguration configuration) : IUniversity
 	{
 		using var connection = GetConnection();
 
-		var university = await connection.QueryFirstOrDefaultAsync<University>("SELECT * FROM university WHERE UniversityID = @UniversityID", new { UniversityID = id });
-
-		return university;
+		try
+		{
+			var university = await connection.QueryFirstOrDefaultAsync<University>("SELECT * FROM universities WHERE UniversityID = @UniversityID", new { UniversityID = id });
+			return university;
+		}
+		catch (Exception)
+		{
+			return null;
+		}
 	}
 
 	// Update university
@@ -59,29 +65,37 @@ public class SQLUniversityRepository(IConfiguration configuration) : IUniversity
 
 		try
 		{
-			// Update uni in DB
-			var numRowUpdated = await connection.ExecuteAsync("UPDATE universities SET Name = @Name, Location = @Location, Description = @Description, NumStudents = @NumStudents WHERE UniversityID = @UniversityID", new
+			await connection.OpenAsync();
+			using var transaction = await connection.BeginTransactionAsync();
+
+			// Check if ID exists
+			var foundUniversity = await connection.QueryFirstOrDefaultAsync<University>("SELECT * FROM universities WHERE UniversityID = @UniversityID", new { UniversityID = id });
+
+			if (foundUniversity == null)
 			{
-				university.Name,
-				university.Location,
-				university.Description,
-				university.NumStudents,
-				UniversityID = id
-			});
+				return null;
+			}
+
+			foundUniversity.Name = university.Name;
+			foundUniversity.Location = university.Location;
+			foundUniversity.Description = university.Description;
+			foundUniversity.NumStudents = university.NumStudents;
+
+			// Update uni in DB
+			var numRowUpdated = await connection.ExecuteAsync("UPDATE universities SET Name = @Name, Location = @Location, Description = @Description, NumStudents = @NumStudents WHERE UniversityID = @UniversityID", foundUniversity);
 
 			if (numRowUpdated == 0)
 			{
 				return null;
 			}
 
-			university.UniversityID = id;
+			return foundUniversity;
 		}
 		catch (Exception)
 		{
 			return null;
 		}
 
-		return university;
 	}
 
 

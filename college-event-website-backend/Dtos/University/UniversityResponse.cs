@@ -11,4 +11,6 @@ public class UniversityResponse
 	public string? Description { get; set; }
 
 	public int NumStudents { get; set; }
+
+	public string Domain { get; set; } = null!;
 }

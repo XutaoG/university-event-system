@@ -43,6 +43,9 @@ public class UniversityController(
 
 		var university = this.mapper.Map<University>(addUniversityRequest);
 
+		// Set university domain
+		university.Domain = user.Email.Split("@").Last();
+
 		university = await this.universityRepository.Create(university);
 
 		if (university == null)
@@ -93,7 +96,7 @@ public class UniversityController(
 	}
 
 	[HttpGet]
-	[Route("id")]
+	[Route("{id}")]
 	public async Task<IActionResult> GetUniversity([FromRoute] int id)
 	{
 		var foundUniversity = await this.universityRepository.GetById(id);
