@@ -1,0 +1,6 @@
+@college_event_website_backend_HostAddress = http://localhost:5092
+
+GET {{college_event_website_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
