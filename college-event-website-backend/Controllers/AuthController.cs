@@ -104,4 +104,14 @@ public class AuthController(
 
 		return Ok(response);
 	}
+
+	[Route("logout")]
+	[HttpPost]
+	public IActionResult Logout()
+	{
+		HttpContext.Response.Cookies.Delete("X-Access-Token");
+		HttpContext.Response.Cookies.Delete("X-Refresh-Token");
+
+		return Ok();
+	}
 }
