@@ -123,7 +123,7 @@ public class RSOController(
 	}
 
 	[HttpGet]
-	[Route("owner")]
+	[Route("own")]
 	[Authorize(Policy = "AdminPolicy")]
 	public async Task<IActionResult> GetOwnedRsos()
 	{
@@ -134,7 +134,24 @@ public class RSOController(
 			return Unauthorized();
 		}
 
-		var rsos = await this.rsoRepository.GetAllByAdminID((int)userId);
+		var rsos = await this.rsoRepository.GetAllByAdminId((int)userId);
+
+		return Ok(rsos);
+	}
+
+	[HttpGet]
+	[Route("joined")]
+	[Authorize(Policy = "StudentPolicy")]
+	public async Task<IActionResult> GetJoinedRsos()
+	{
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		if (userId == null)
+		{
+			return Unauthorized();
+		}
+
+		var rsos = await this.rsoRepository.GetAllByStudentId((int)userId);
 
 		return Ok(rsos);
 	}
@@ -161,6 +178,37 @@ public class RSOController(
 		}
 
 		var success = await this.rsoRepository.CreateRsoMembers((int)userId, rsoId);
+
+		if (!success)
+		{
+			return BadRequest();
+		}
+
+		return Ok();
+	}
+
+	[HttpPost]
+	[Route("leave/{rsoId}")]
+	[Authorize(Policy = "StudentPolicy")]
+	public async Task<IActionResult> LeaveRso([FromRoute] int rsoId)
+	{
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		// Check if users exists
+		if (userId == null)
+		{
+			return Unauthorized();
+		}
+
+		// Check if RSO exists
+		var rso = this.rsoRepository.GetById(rsoId);
+
+		if (rso == null)
+		{
+			return NotFound();
+		}
+
+		var success = await this.rsoRepository.DeleteRsoMembers((int)userId, rsoId);
 
 		if (!success)
 		{

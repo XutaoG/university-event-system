@@ -144,13 +144,28 @@ public class SQLRSORepository(
 		}
 	}
 
-	public async Task<List<RSO>> GetAllByAdminID(int adminID)
+	public async Task<List<RSO>> GetAllByAdminId(int adminId)
 	{
 		using var connection = GetConnection();
 
 		try
 		{
-			var rsos = await connection.QueryAsync<RSO>("SELECT * FROM rsos WHERE AdminID = @AdminID", new { AdminID = adminID });
+			var rsos = await connection.QueryAsync<RSO>("SELECT * FROM rsos WHERE AdminID = @AdminID", new { AdminID = adminId });
+			return rsos.ToList();
+		}
+		catch (Exception)
+		{
+			return [];
+		}
+	}
+
+	public async Task<List<RSO>> GetAllByStudentId(int studentId)
+	{
+		using var connection = GetConnection();
+
+		try
+		{
+			var rsos = await connection.QueryAsync<RSO>("SELECT * FROM rsos WHERE RSOID IN (SELECT RSOID FROM rso_members WHERE UID = @UID);", new { UID = studentId });
 			return rsos.ToList();
 		}
 		catch (Exception)
@@ -167,6 +182,27 @@ public class SQLRSORepository(
 		{
 			// Insert RSO_Members into DB
 			var numRowUpdated = await connection.ExecuteAsync("INSERT INTO rso_members (RSOID, UID) VALUES (@RSOID, @UID)", new { RSOID = rsoId, UID = uid });
+			if (numRowUpdated == 0)
+			{
+				return false;
+			}
+
+			return true;
+		}
+		catch (Exception)
+		{
+			return false;
+		}
+	}
+
+	public async Task<bool> DeleteRsoMembers(int uid, int rsoId)
+	{
+		using var connection = GetConnection();
+
+		try
+		{
+			// delete RSO_Members into DB
+			var numRowUpdated = await connection.ExecuteAsync("DELETE FROM rso_members WHERE RSOID = @RSOID AND UID = @UID", new { RSOID = rsoId, UID = uid });
 			if (numRowUpdated == 0)
 			{
 				return false;

@@ -13,7 +13,11 @@ public interface IRSORepository
 
 	Task<RSO?> Delete(int id);
 
-	Task<List<RSO>> GetAllByAdminID(int adminID);
+	Task<List<RSO>> GetAllByAdminId(int adminId);
+
+	Task<List<RSO>> GetAllByStudentId(int studentId);
 
 	Task<bool> CreateRsoMembers(int uid, int rsoId);
+
+	Task<bool> DeleteRsoMembers(int uid, int rsoId);
 }
