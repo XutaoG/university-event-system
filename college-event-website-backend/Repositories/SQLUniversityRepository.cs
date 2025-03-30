@@ -98,6 +98,22 @@ public class SQLUniversityRepository(IConfiguration configuration) : IUniversity
 
 	}
 
+	public async Task<University?> GetUniversityByDomain(string domain)
+	{
+		using var connection = GetConnection();
+
+		try
+		{
+			var foundUniversity = await connection.QueryFirstOrDefaultAsync<University>("SELECT * FROM universities WHERE Domain = @Domain", new { Domain = domain });
+
+			return foundUniversity;
+		}
+		catch (Exception)
+		{
+			return null;
+		}
+	}
+
 	// public async Task<University?> GetUniversityByUserId(int id)
 	// {
 	// 	using var connection = GetConnection();

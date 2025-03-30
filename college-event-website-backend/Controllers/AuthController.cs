@@ -12,12 +12,14 @@ namespace CollegeEvent.API.Controller;
 [ApiController]
 public class AuthController(
 	IUserRepository userRepository,
+	IUniversityRepository universityRepository,
 	PasswordHashService passwordHashService,
 	JwtTokenService jwtTokenService,
 	IConfiguration configuration,
 	IMapper mapper) : ControllerBase
 {
 	private readonly IUserRepository userRepository = userRepository;
+	private readonly IUniversityRepository universityRepository = universityRepository;
 	private readonly PasswordHashService passwordHashService = passwordHashService;
 	private readonly JwtTokenService jwtTokenService = jwtTokenService;
 	private readonly IConfiguration configuration = configuration;
@@ -39,6 +41,10 @@ public class AuthController(
 			PasswordHash = passwordHashService.HashPassword(signUpRequest.Password),
 			UserRole = signUpRequest.UserRole
 		};
+
+		// Assign universityID
+		var university = await this.universityRepository.GetUniversityByDomain(user.Email.Split("@").Last());
+		user.UniversityID = university?.UniversityID;
 
 		// Add user to DB
 		user = await this.userRepository.Create(user);
