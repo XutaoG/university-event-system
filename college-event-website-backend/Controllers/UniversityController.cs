@@ -96,10 +96,19 @@ public class UniversityController(
 	}
 
 	[HttpGet]
-	[Route("{id}")]
 	public async Task<IActionResult> GetUniversity([FromRoute] int id)
 	{
-		var foundUniversity = await this.universityRepository.GetById(id);
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		var user = await this.userRepository.GetById((int)userId!);
+
+		// Check if uniID is valid
+		if (user == null || user.UniversityID == null)
+		{
+			return NotFound();
+		}
+
+		var foundUniversity = await this.universityRepository.GetById((int)user.UniversityID);
 
 		if (foundUniversity == null)
 		{

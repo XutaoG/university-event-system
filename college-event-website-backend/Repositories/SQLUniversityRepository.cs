@@ -98,6 +98,34 @@ public class SQLUniversityRepository(IConfiguration configuration) : IUniversity
 
 	}
 
+	// public async Task<University?> GetUniversityByUserId(int id)
+	// {
+	// 	using var connection = GetConnection();
+
+	// 	try
+	// 	{
+	// 		await connection.OpenAsync();
+	// 		using var transaction = await connection.BeginTransactionAsync();
+
+	// 		var foundUser = await connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE UID = @UID", new { UID = id });
+
+	// 		if (foundUser == null)
+	// 		{
+	// 			return null;
+	// 		}
+
+	// 		var foundUniversity = await connection.QueryFirstOrDefaultAsync<University>("SELECT * FROM universities WHERE Domain = @Domain", new { Domain = foundUser.Email.Split("@").Last() });
+
+	// 		await transaction.CommitAsync();
+
+	// 		return foundUniversity;
+	// 	}
+	// 	catch (Exception)
+	// 	{
+	// 		return null;
+	// 	}
+	// }
+
 
 	// Establish connection
 	private MySqlConnection GetConnection()

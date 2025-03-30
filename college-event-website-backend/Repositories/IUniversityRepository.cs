@@ -9,4 +9,6 @@ public interface IUniversityRepository
 	Task<University?> GetById(int id);
 
 	Task<University?> Update(int id, University university);
+
+	// Task<University?> GetUniversityByUserId(int id);
 }
