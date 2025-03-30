@@ -216,10 +216,24 @@ public class SQLRSORepository(
 		}
 	}
 
+	public async Task<List<RSO>> GetAllByAvailability(int id)
+	{
+		using var connection = GetConnection();
+
+		try
+		{
+			var rsos = await connection.QueryAsync<RSO>("SELECT * FROM rsos WHERE RSOID NOT IN (SELECT RSOID FROM rso_members WHERE UID = @UID)", new { UID = id });
+			return rsos.ToList();
+		}
+		catch (Exception)
+		{
+			return [];
+		}
+	}
+
 	// Establish connection
 	private MySqlConnection GetConnection()
 	{
 		return new MySqlConnection(configuration.GetConnectionString("DefaultConnection"));
 	}
-
 }

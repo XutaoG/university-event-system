@@ -156,6 +156,22 @@ public class RSOController(
 		return Ok(rsos);
 	}
 
+	[HttpGet]
+	[Route("join")]
+	public async Task<IActionResult> GetAvailableRsos()
+	{
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		if (userId == null)
+		{
+			return Unauthorized();
+		}
+
+		var rsos = await this.rsoRepository.GetAllByAvailability((int)userId);
+
+		return Ok(rsos);
+	}
+
 	[HttpPost]
 	[Route("join/{rsoId}")]
 	[Authorize(Policy = "StudentPolicy")]

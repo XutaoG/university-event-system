@@ -17,6 +17,8 @@ public interface IRSORepository
 
 	Task<List<RSO>> GetAllByStudentId(int studentId);
 
+	Task<List<RSO>> GetAllByAvailability(int id);
+
 	Task<bool> CreateRsoMembers(int uid, int rsoId);
 
 	Task<bool> DeleteRsoMembers(int uid, int rsoId);
