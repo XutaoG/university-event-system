@@ -138,4 +138,35 @@ public class RSOController(
 
 		return Ok(rsos);
 	}
+
+	[HttpPost]
+	[Route("join/{rsoId}")]
+	[Authorize(Policy = "StudentPolicy")]
+	public async Task<IActionResult> JoinRso([FromRoute] int rsoId)
+	{
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		// Check if users exists
+		if (userId == null)
+		{
+			return Unauthorized();
+		}
+
+		// Check if RSO exists
+		var rso = this.rsoRepository.GetById(rsoId);
+
+		if (rso == null)
+		{
+			return NotFound();
+		}
+
+		var success = await this.rsoRepository.CreateRsoMembers((int)userId, rsoId);
+
+		if (!success)
+		{
+			return BadRequest();
+		}
+
+		return Ok();
+	}
 }

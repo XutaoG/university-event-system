@@ -159,9 +159,31 @@ public class SQLRSORepository(
 		}
 	}
 
+	public async Task<bool> CreateRsoMembers(int uid, int rsoId)
+	{
+		using var connection = GetConnection();
+
+		try
+		{
+			// Insert RSO_Members into DB
+			var numRowUpdated = await connection.ExecuteAsync("INSERT INTO rso_members (RSOID, UID) VALUES (@RSOID, @UID)", new { RSOID = rsoId, UID = uid });
+			if (numRowUpdated == 0)
+			{
+				return false;
+			}
+
+			return true;
+		}
+		catch (Exception)
+		{
+			return false;
+		}
+	}
+
 	// Establish connection
 	private MySqlConnection GetConnection()
 	{
 		return new MySqlConnection(configuration.GetConnectionString("DefaultConnection"));
 	}
+
 }

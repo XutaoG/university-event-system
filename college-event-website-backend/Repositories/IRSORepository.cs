@@ -14,4 +14,6 @@ public interface IRSORepository
 	Task<RSO?> Delete(int id);
 
 	Task<List<RSO>> GetAllByAdminID(int adminID);
+
+	Task<bool> CreateRsoMembers(int uid, int rsoId);
 }

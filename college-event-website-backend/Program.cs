@@ -57,6 +57,7 @@ builder.Services.AddAuthorization(options =>
 {
 	options.AddPolicy("SuperAdminPolicy", policy => policy.Requirements.Add(new UserRoleAuthorizationRequirement("SuperAdmin")));
 	options.AddPolicy("AdminPolicy", policy => policy.Requirements.Add(new UserRoleAuthorizationRequirement("Admin")));
+	options.AddPolicy("StudentPolicy", policy => policy.Requirements.Add(new UserRoleAuthorizationRequirement("Student")));
 	options.AddPolicy("UniversityFound", policy => policy.Requirements.Add(new UniversityFoundAuthorizationRequirement()));
 });
 
