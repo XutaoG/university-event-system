@@ -42,8 +42,15 @@ public class AuthController(
 			UserRole = signUpRequest.UserRole
 		};
 
-		// Assign universityID
 		var university = await this.universityRepository.GetUniversityByDomain(user.Email.Split("@").Last());
+
+		// Check if Email domain is valid unless the user is a super admin
+		if (user.UserRole != "SuperAdmin" && university == null)
+		{
+			ModelState.AddModelError("UniversityNotFound", "The Email domain does not belong to a registered university");
+			return NotFound(ModelState);
+		}
+
 		user.UniversityID = university?.UniversityID;
 
 		// Add user to DB
