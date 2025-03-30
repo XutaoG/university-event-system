@@ -51,12 +51,12 @@ public class RSOController(
 
 		var response = this.mapper.Map<RSOResponse>(rso);
 
-		return CreatedAtAction(nameof(GetRSO), new { id = response.RSOID }, response);
+		return CreatedAtAction(nameof(GetRso), new { id = response.RSOID }, response);
 	}
 
 	[HttpGet]
 	[Route("{id}")]
-	public async Task<IActionResult> GetRSO([FromRoute] int id)
+	public async Task<IActionResult> GetRso([FromRoute] int id)
 	{
 		var foundRso = await this.rsoRepository.GetById(id);
 
@@ -120,5 +120,22 @@ public class RSOController(
 		}
 
 		return NoContent();
+	}
+
+	[HttpGet]
+	[Route("owner")]
+	[Authorize(Policy = "AdminPolicy")]
+	public async Task<IActionResult> GetOwnedRsos()
+	{
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		if (userId == null)
+		{
+			return Unauthorized();
+		}
+
+		var rsos = await this.rsoRepository.GetAllByAdminID((int)userId);
+
+		return Ok(rsos);
 	}
 }
