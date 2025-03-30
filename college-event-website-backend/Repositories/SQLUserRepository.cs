@@ -25,7 +25,7 @@ public class SQLUserRepository : IUserRepository
 		try
 		{
 			// Insert user into DB
-			var numRowUpdated = await connection.ExecuteAsync("INSERT INTO users (Name, Email, PasswordHash, UserRole) VALUES (@Name, @Email, @PasswordHash, @UserRole)", user);
+			var numRowUpdated = await connection.ExecuteAsync("INSERT INTO users (Name, Email, PasswordHash, UserRole, UniversityID) VALUES (@Name, @Email, @PasswordHash, @UserRole, @UniversityID)", user);
 
 			if (numRowUpdated == 0)
 			{

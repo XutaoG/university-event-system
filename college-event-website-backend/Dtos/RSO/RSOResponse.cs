@@ -1,6 +1,6 @@
-namespace CollegeEvent.API.Models;
+namespace CollegeEvent.API.Dtos.RSO;
 
-public class RSO
+public class RSOResponse
 {
 	public int RSOID { get; set; }
 

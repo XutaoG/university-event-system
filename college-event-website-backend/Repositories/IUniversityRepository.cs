@@ -10,5 +10,7 @@ public interface IUniversityRepository
 
 	Task<University?> Update(int id, University university);
 
+	Task<University?> GetUniversityByDomain(string domain);
+
 	// Task<University?> GetUniversityByUserId(int id);
 }

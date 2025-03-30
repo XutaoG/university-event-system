@@ -1,5 +1,6 @@
 using AutoMapper;
 using CollegeEvent.API.Dtos.Auth;
+using CollegeEvent.API.Dtos.RSO;
 using CollegeEvent.API.Dtos.University;
 using CollegeEvent.API.Models;
 
@@ -16,5 +17,10 @@ public class AutoMapperProfile : Profile
 		CreateMap<AddUniversityRequest, University>();
 		CreateMap<UpdateUniversityRequest, University>();
 		CreateMap<University, UniversityResponse>();
+
+		// RSO
+		CreateMap<AddRSORequest, RSO>();
+		CreateMap<UpdateRSORequest, RSO>();
+		CreateMap<RSO, RSOResponse>();
 	}
 }

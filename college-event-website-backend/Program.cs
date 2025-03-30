@@ -17,6 +17,7 @@ builder.Services.AddSingleton(typeof(PasswordHashService));
 // Add repositories to the container
 builder.Services.AddScoped<IUserRepository, SQLUserRepository>();
 builder.Services.AddScoped<IUniversityRepository, SQLUniversityRepository>();
+builder.Services.AddScoped<IRSORepository, SQLRSORepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
@@ -55,9 +56,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(options =>
 {
 	options.AddPolicy("SuperAdminPolicy", policy => policy.Requirements.Add(new UserRoleAuthorizationRequirement("SuperAdmin")));
+	options.AddPolicy("AdminPolicy", policy => policy.Requirements.Add(new UserRoleAuthorizationRequirement("Admin")));
+	options.AddPolicy("UniversityFound", policy => policy.Requirements.Add(new UniversityFoundAuthorizationRequirement()));
 });
 
 builder.Services.AddSingleton<IAuthorizationHandler, UserRoleAuthorizationHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, UniversityFoundAuthorizationHandler>();
 
 builder.Services.AddControllers();
 
