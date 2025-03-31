@@ -5,12 +5,10 @@ using MySql.Data.MySqlClient;
 namespace CollegeEvent.API.Repositories;
 
 public class SQLRSORepository(
-	IConfiguration configuration,
-	IUniversityRepository universityRepository
+	IConfiguration configuration
 	) : IRSORepository
 {
 	private readonly IConfiguration configuration = configuration;
-	private readonly IUniversityRepository universityRepository = universityRepository;
 
 	// Create RSO
 	public async Task<RSO?> Create(int adminId, RSO rso)

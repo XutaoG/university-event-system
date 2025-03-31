@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CollegeEvent.API.CustomAuthorizations;
 
-public class UserRoleAuthorizationRequirement(string requiredRole) : IAuthorizationRequirement
+public class UserRoleAuthorizationRequirement(string[] requiredRole) : IAuthorizationRequirement
 {
-	public string RequiredRole { get; } = requiredRole;
+	public string[] RequiredRole { get; } = requiredRole;
 }
 
 public class UserRoleAuthorizationHandler : AuthorizationHandler<UserRoleAuthorizationRequirement>
@@ -18,9 +18,15 @@ public class UserRoleAuthorizationHandler : AuthorizationHandler<UserRoleAuthori
 		var userRoleClaim = context.User?.FindFirst("userRole");
 
 		// If claim has User Role
-		if (userRoleClaim != null && userRoleClaim.Value == requirement.RequiredRole)
+		if (userRoleClaim != null)
 		{
-			context.Succeed(requirement);
+			foreach (var requiredRole in requirement.RequiredRole)
+			{
+				if (requiredRole == userRoleClaim.Value)
+				{
+					context.Succeed(requirement);
+				}
+			}
 		}
 
 		return Task.CompletedTask;
