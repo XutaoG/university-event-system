@@ -25,7 +25,7 @@ public class RSOController(
 	private readonly IUserRepository userRepository = userRepository;
 
 	[HttpPost]
-	[Authorize(Policy = "AdminPolicy")]
+	[Authorize(Policy = "StudentAdminPolicy")]
 	public async Task<IActionResult> AddRso([FromBody] AddRSORequest addRSORequest)
 	{
 		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
@@ -49,6 +49,14 @@ public class RSOController(
 			return BadRequest();
 		}
 
+		// Update user role to admin if user is a student
+		var user = await this.userRepository.GetById((int)userId);
+
+		if (user != null && user.UserRole == "Student")
+		{
+			await this.userRepository.UpdateUserRole((int)userId, "Admin");
+		}
+
 		var response = this.mapper.Map<RSOResponse>(rso);
 
 		return CreatedAtAction(nameof(GetRso), new { id = response.RSOID }, response);
@@ -70,7 +78,7 @@ public class RSOController(
 
 	[HttpPut]
 	[Route("{id}")]
-	[Authorize(Policy = "AdminPolicy")]
+	[Authorize(Policy = "StudentAdminPolicy")]
 	public async Task<IActionResult> UpdateRso([FromRoute] int id, [FromBody] UpdateRSORequest updateRSORequest)
 	{
 		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
@@ -87,6 +95,12 @@ public class RSOController(
 
 		var rso = this.mapper.Map<RSO>(updateRSORequest);
 
+		// Check if user permission
+		if (rso.AdminID != userId)
+		{
+			return Unauthorized();
+		}
+
 		// Update RSO
 		rso = await this.rsoRepository.Update(id, rso);
 
@@ -102,7 +116,7 @@ public class RSOController(
 
 	[HttpDelete]
 	[Route("{id}")]
-	[Authorize(Policy = "AdminPolicy")]
+	[Authorize(Policy = "StudentAdminPolicy")]
 	public async Task<IActionResult> DeleteRso([FromRoute] int id)
 	{
 		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
@@ -112,19 +126,27 @@ public class RSOController(
 			return Unauthorized();
 		}
 
-		var rso = await this.rsoRepository.Delete(id);
+		var rso = await this.rsoRepository.GetById(id);
 
 		if (rso == null)
 		{
 			return NotFound();
 		}
 
+		// Check if user permission
+		if (rso.AdminID != userId)
+		{
+			return Unauthorized();
+		}
+
+		await this.rsoRepository.Delete(id);
+
 		return NoContent();
 	}
 
 	[HttpGet]
 	[Route("own")]
-	[Authorize(Policy = "AdminPolicy")]
+	[Authorize(Policy = "StudentAdminPolicy")]
 	public async Task<IActionResult> GetOwnedRsos()
 	{
 		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
@@ -141,7 +163,6 @@ public class RSOController(
 
 	[HttpGet]
 	[Route("joined")]
-	[Authorize(Policy = "StudentPolicy")]
 	public async Task<IActionResult> GetJoinedRsos()
 	{
 		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
@@ -174,7 +195,6 @@ public class RSOController(
 
 	[HttpPost]
 	[Route("join/{rsoId}")]
-	[Authorize(Policy = "StudentPolicy")]
 	public async Task<IActionResult> JoinRso([FromRoute] int rsoId)
 	{
 		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
@@ -205,7 +225,6 @@ public class RSOController(
 
 	[HttpPost]
 	[Route("leave/{rsoId}")]
-	[Authorize(Policy = "StudentPolicy")]
 	public async Task<IActionResult> LeaveRso([FromRoute] int rsoId)
 	{
 		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());

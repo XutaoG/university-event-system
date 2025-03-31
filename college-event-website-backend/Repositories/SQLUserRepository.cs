@@ -96,9 +96,32 @@ public class SQLUserRepository : IUserRepository
 		return await GetById(userId);
 	}
 
+	public async Task<User?> UpdateUserRole(int id, string newUserRole)
+	{
+		using var connection = GetConnection();
+
+		try
+		{
+			// Find user with id
+			var numRowUpdated = await connection.ExecuteAsync("UPDATE users SET UserRole = @UserRole WHERE UID = @UID", new { UserRole = newUserRole, UID = id });
+
+			if (numRowUpdated == 0)
+			{
+				return null;
+			}
+		}
+		catch (Exception)
+		{
+			return null;
+		}
+
+		return await GetById(id);
+	}
+
 	// Establish connection
 	private MySqlConnection GetConnection()
 	{
 		return new MySqlConnection(configuration.GetConnectionString("DefaultConnection"));
 	}
+
 }

@@ -11,4 +11,6 @@ public interface IUserRepository
 	Task<User?> Authenticate(string email, string password);
 
 	Task<User?> AssignUniversity(int userId, int universityId);
+
+	Task<User?> UpdateUserRole(int id, string newUserRole);
 }
