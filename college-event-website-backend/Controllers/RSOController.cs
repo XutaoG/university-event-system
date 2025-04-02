@@ -75,7 +75,7 @@ public class RSOController(
 
 		var response = this.mapper.Map<RSOResponse>(foundRso);
 
-		return Ok(foundRso);
+		return Ok(response);
 	}
 
 	[HttpPut]
