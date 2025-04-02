@@ -1,9 +1,9 @@
-namespace CollegeEvent.API.Models;
+using CollegeEvent.API.Dtos.Location;
 
-public class Event
+namespace CollegeEvent.API.Dtos.Event;
+
+public class UpdateEventRequest
 {
-	public int EventID { get; set; }
-
 	public string Name { get; set; } = null!;
 
 	public string EventCategory { get; set; } = null!;
@@ -20,7 +20,5 @@ public class Event
 
 	public string? ContactEmail { get; set; }
 
-	public int LocID { get; set; }
-
-	public int AdminID { get; set; }
+	public UpdateLocationRequest Location { get; set; } = null!;
 }

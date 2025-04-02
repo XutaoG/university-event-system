@@ -18,6 +18,8 @@ builder.Services.AddSingleton(typeof(PasswordHashService));
 builder.Services.AddScoped<IUserRepository, SQLUserRepository>();
 builder.Services.AddScoped<IUniversityRepository, SQLUniversityRepository>();
 builder.Services.AddScoped<IRSORepository, SQLRSORepository>();
+builder.Services.AddScoped<ILocationRepository, SQLLocationRepository>();
+builder.Services.AddScoped<IEventRepository, SQLEventRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 

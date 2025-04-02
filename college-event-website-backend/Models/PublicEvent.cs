@@ -1,11 +1,8 @@
-namespace CollegeEvent.API.Models
+namespace CollegeEvent.API.Models;
+
+public class PublicEvent : Event
 {
-	public class PublicEvent
-	{
-		public int EventID { get; set; }
+	public int UniversityID { get; set; }
 
-		public int SuperAdminID { get; set; }
-
-		public bool Approved { get; set; }
-	}
+	public bool Approved { get; set; }
 }

@@ -1,9 +1,6 @@
-namespace CollegeEvent.API.Models
-{
-	public class PrivateEvent
-	{
-		public int EventID { get; set; }
+namespace CollegeEvent.API.Models;
 
-		public int UniveristyID { get; set; }
-	}
+public class PrivateEvent : Event
+{
+	public int UniversityID { get; set; }
 }

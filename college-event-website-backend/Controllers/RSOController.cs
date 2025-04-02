@@ -73,6 +73,8 @@ public class RSOController(
 			return NotFound();
 		}
 
+		var response = this.mapper.Map<RSOResponse>(foundRso);
+
 		return Ok(foundRso);
 	}
 

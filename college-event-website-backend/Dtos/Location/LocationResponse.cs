@@ -1,6 +1,8 @@
-namespace CollegeEvent.API.Models;
+using System.ComponentModel.DataAnnotations;
 
-public class Location
+namespace CollegeEvent.API.Dtos.Location;
+
+public class LocationResponse
 {
 	public int LocID { get; set; }
 

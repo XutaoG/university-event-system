@@ -1,6 +1,8 @@
-namespace CollegeEvent.API.Models;
+using CollegeEvent.API.Dtos.Location;
 
-public class Event
+namespace CollegeEvent.API.Dtos.Event;
+
+public class EventResponse
 {
 	public int EventID { get; set; }
 
@@ -21,6 +23,8 @@ public class Event
 	public string? ContactEmail { get; set; }
 
 	public int LocID { get; set; }
+
+	public LocationResponse Location { get; set; } = null!;
 
 	public int AdminID { get; set; }
 }
