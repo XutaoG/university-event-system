@@ -326,7 +326,7 @@ public class SQLEventRepository(
 			}
 
 			// Update approved in DB
-			int numRowUpdated = await connection.ExecuteAsync("UPDATE events SET Approved = true WHERE EventID = @EventID", new { EventID = id });
+			int numRowUpdated = await connection.ExecuteAsync("UPDATE public_events SET Approved = true WHERE EventID = @EventID", new { EventID = id });
 
 			if (numRowUpdated == 0)
 			{
@@ -335,11 +335,64 @@ public class SQLEventRepository(
 
 			await transaction.CommitAsync();
 
-			return foundEvent;
+			return await GetPublicEventById(id);
 		}
 		catch (Exception)
 		{
 			return null;
+		}
+	}
+
+	public async Task<List<PublicEvent>> GetAllPublicEvents()
+	{
+		using var connection = GetConnection();
+
+		try
+		{
+			var pubilcEvents = await connection.QueryAsync<PublicEvent>(@"SELECT e.*, p.Approved, p.UniversityID FROM events e
+																		INNER JOIN public_events p ON e.EventID = p.EventID");
+
+			return pubilcEvents.ToList();
+		}
+		catch (Exception)
+		{
+			return [];
+		}
+	}
+
+	public async Task<List<PrivateEvent>> GetAllPrivateEvents(int universityId)
+	{
+		using var connection = GetConnection();
+
+		try
+		{
+			var privateEvents = await connection.QueryAsync<PrivateEvent>(@"SELECT e.*, p.UniversityID FROM events e
+																		INNER JOIN private_events p ON e.EventID = p.EventID WHERE p.UniversityID = @UniversityID",
+																		new { UniversityID = universityId });
+
+			return privateEvents.ToList();
+		}
+		catch (Exception)
+		{
+			return [];
+		}
+	}
+
+	public async Task<List<RSOEvent>> GetAllRsoEvents(int rsoId)
+	{
+		using var connection = GetConnection();
+
+		try
+		{
+			var rsoEvents = await connection.QueryAsync<RSOEvent>(@"SELECT e.*, p.RSOID FROM events e
+																		INNER JOIN rso_events p ON e.EventID = p.EventID WHERE p.RSOID = @RSOID",
+																		new { RSOID = rsoId });
+
+			return rsoEvents.ToList();
+		}
+		catch (Exception)
+		{
+			return [];
 		}
 	}
 
@@ -348,4 +401,6 @@ public class SQLEventRepository(
 	{
 		return new MySqlConnection(configuration.GetConnectionString("DefaultConnection"));
 	}
+
+
 }

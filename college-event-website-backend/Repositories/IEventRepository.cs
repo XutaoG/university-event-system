@@ -23,4 +23,10 @@ public interface IEventRepository
 	Task<Event?> DeleteEvent(int id);
 
 	Task<PublicEvent?> SetPublicEventApproved(int id);
+
+	Task<List<PublicEvent>> GetAllPublicEvents();
+
+	Task<List<PrivateEvent>> GetAllPrivateEvents(int universityId);
+
+	Task<List<RSOEvent>> GetAllRsoEvents(int rsoId);
 }

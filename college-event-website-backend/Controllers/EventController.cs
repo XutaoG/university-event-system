@@ -402,4 +402,118 @@ public class EventController(
 
 		return NoContent();
 	}
+
+	[Route("public/approve/{id}")]
+	[HttpPost]
+	[Authorize(Policy = "SuperAdminPolicy")]
+	public async Task<IActionResult> ApprovePublicEvent([FromRoute] int id)
+	{
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		if (userId == null)
+		{
+			return Unauthorized();
+		}
+
+		var publicEvent = await this.eventRepository.GetPublicEventById(id);
+
+		if (publicEvent == null)
+		{
+			return NotFound();
+		}
+
+		var user = await this.userRepository.GetById((int)userId);
+
+		// Check if super admin has permission to approve
+		if (publicEvent.UniversityID != user!.UniversityID)
+		{
+			return Unauthorized();
+		}
+
+		publicEvent = await this.eventRepository.SetPublicEventApproved(publicEvent.EventID);
+
+		return Ok(publicEvent);
+	}
+
+	[Route("public")]
+	[HttpGet]
+	public async Task<IActionResult> GetAllPublicEvents()
+	{
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		if (userId == null)
+		{
+			return Unauthorized();
+		}
+
+		var publicEvents = await this.eventRepository.GetAllPublicEvents();
+
+		var response = this.mapper.Map<PublicEventResponse[]>(publicEvents);
+
+		return Ok(response);
+	}
+
+	[Route("private")]
+	[HttpGet]
+	public async Task<IActionResult> GetAllPrivateEvents()
+	{
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		if (userId == null)
+		{
+			return Unauthorized();
+		}
+
+		var user = await this.userRepository.GetById((int)userId);
+
+		if (user == null || user.UniversityID == null)
+		{
+			return Unauthorized();
+		}
+
+		var privateEvents = await this.eventRepository.GetAllPrivateEvents((int)user.UniversityID);
+
+		var response = this.mapper.Map<PrivateEvent[]>(privateEvents);
+
+		return Ok(response);
+	}
+
+	[Route("rso/")]
+	[HttpGet]
+	public async Task<IActionResult> GetAllRsoEvents()
+	{
+		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
+
+		if (userId == null)
+		{
+			return Unauthorized();
+		}
+
+		var user = await this.userRepository.GetById((int)userId);
+
+		if (user == null)
+		{
+			return Unauthorized();
+		}
+
+		var rsos = await this.rsoRepository.GetAllByStudentId((int)userId);
+
+		var rsoEventTasks = new List<Task<List<RSOEvent>>>();
+
+		for (int i = 0; i < rsos.Count; i++)
+		{
+			rsoEventTasks.Add(this.eventRepository.GetAllRsoEvents(rsos[i].RSOID));
+		}
+
+		var rsoEvents = new List<RSOEvent>();
+
+		foreach (var rsoEventList in await Task.WhenAll(rsoEventTasks))
+		{
+			rsoEvents.AddRange(rsoEventList);
+		}
+
+		var response = this.mapper.Map<RsoEventResponse[]>(rsoEvents);
+
+		return Ok(response);
+	}
 }
