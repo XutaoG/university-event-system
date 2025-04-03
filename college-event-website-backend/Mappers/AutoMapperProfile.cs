@@ -1,5 +1,7 @@
 using AutoMapper;
+using CollegeEvent.API.Dto.Comment;
 using CollegeEvent.API.Dtos.Auth;
+using CollegeEvent.API.Dtos.Comment;
 using CollegeEvent.API.Dtos.Event;
 using CollegeEvent.API.Dtos.Location;
 using CollegeEvent.API.Dtos.RSO;
@@ -45,5 +47,10 @@ public class AutoMapperProfile : Profile
 		// Event
 		CreateMap<UpdateEventRequest, Event>();
 		CreateMap<Event, EventResponse>();
+
+		// Comment
+		CreateMap<AddCommentRequest, Comment>();
+		CreateMap<UpdateCommentRequest, Comment>();
+		CreateMap<Comment, CommentResponse>();
 	}
 }

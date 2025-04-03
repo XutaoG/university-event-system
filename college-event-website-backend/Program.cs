@@ -20,6 +20,7 @@ builder.Services.AddScoped<IUniversityRepository, SQLUniversityRepository>();
 builder.Services.AddScoped<IRSORepository, SQLRSORepository>();
 builder.Services.AddScoped<ILocationRepository, SQLLocationRepository>();
 builder.Services.AddScoped<IEventRepository, SQLEventRepository>();
+builder.Services.AddScoped<ICommentRepository, SQLCommentRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
