@@ -90,9 +90,8 @@ public class SQLEventRepository(
 
 			return await GetPrivateEventById(insertedId);
 		}
-		catch (Exception e)
+		catch (Exception)
 		{
-			Console.WriteLine(e.Message);
 			return null;
 		}
 	}
@@ -132,9 +131,8 @@ public class SQLEventRepository(
 
 			return await GetRsoEventById(insertedId);
 		}
-		catch (Exception e)
+		catch (Exception)
 		{
-			Console.WriteLine(e.Message);
 			return null;
 		}
 	}
