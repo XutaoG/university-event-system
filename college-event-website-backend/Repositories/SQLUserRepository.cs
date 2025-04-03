@@ -51,6 +51,17 @@ public class SQLUserRepository : IUserRepository
 		return user;
 	}
 
+	// Get user
+	public async Task<User?> GetByEmail(string email)
+	{
+		using var connection = GetConnection();
+
+		// Find user with UID
+		var user = await connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE Email = @Email", new { Email = email });
+
+		return user;
+	}
+
 	// Authenticate user 
 	public async Task<User?> Authenticate(string email, string password)
 	{

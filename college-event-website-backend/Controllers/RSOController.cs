@@ -52,7 +52,6 @@ public class RSOController(
 			return Unauthorized();
 		}
 
-		// Check email domain
 		var university = await this.universityRepository.GetById((int)user.UniversityID!);
 
 		if (university == null)
@@ -60,14 +59,17 @@ public class RSOController(
 			return BadRequest();
 		}
 
+		// Verify email existence and domain
+		var emailVerifyTasks = new List<Task<User?>>();
+
 		foreach (var email in addRSORequest.MemberEmails)
 		{
-			if (email == user.Email)
-			{
-				return BadRequest();
-			}
+			emailVerifyTasks.Add(this.userRepository.GetByEmail(email));
+		}
 
-			if (email.Split("@").Last() != university.Domain)
+		foreach (var res in await Task.WhenAll(emailVerifyTasks))
+		{
+			if (res == null || res.Email.Split("@").Last() != university.Domain || res.UID == userId)
 			{
 				return BadRequest();
 			}
