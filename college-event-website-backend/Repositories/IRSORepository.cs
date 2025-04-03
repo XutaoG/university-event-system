@@ -1,11 +1,10 @@
 using CollegeEvent.API.Models;
-using Microsoft.OpenApi.Models;
 
 namespace CollegeEvent.API.Repositories;
 
 public interface IRSORepository
 {
-	Task<RSO?> Create(int adminID, RSO rso);
+	Task<RSO?> Create(int adminID, RSO rso, List<string> emails);
 
 	Task<RSO?> GetById(int id);
 

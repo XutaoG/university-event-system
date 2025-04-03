@@ -16,13 +16,15 @@ public class RSOController(
 	IRSORepository rsoRepository,
 	IMapper mapper,
 	JwtTokenService jwtTokenService,
-	IUserRepository userRepository
+	IUserRepository userRepository,
+	IUniversityRepository universityRepository
 ) : ControllerBase
 {
 	private readonly IRSORepository rsoRepository = rsoRepository;
 	private readonly IMapper mapper = mapper;
 	private readonly JwtTokenService jwtTokenService = jwtTokenService;
 	private readonly IUserRepository userRepository = userRepository;
+	private readonly IUniversityRepository universityRepository = universityRepository;
 
 	[HttpPost]
 	[Authorize(Policy = "StudentAdminPolicy")]
@@ -40,9 +42,38 @@ public class RSOController(
 			return BadRequest(ModelState);
 		}
 
+
 		var rso = this.mapper.Map<RSO>(addRSORequest);
 
-		rso = await this.rsoRepository.Create((int)userId!, rso);
+		var user = await this.userRepository.GetById((int)userId);
+
+		if (user == null)
+		{
+			return Unauthorized();
+		}
+
+		// Check email domain
+		var university = await this.universityRepository.GetById((int)user.UniversityID!);
+
+		if (university == null)
+		{
+			return BadRequest();
+		}
+
+		foreach (var email in addRSORequest.MemberEmails)
+		{
+			if (email == user.Email)
+			{
+				return BadRequest();
+			}
+
+			if (email.Split("@").Last() != university.Domain)
+			{
+				return BadRequest();
+			}
+		}
+
+		rso = await this.rsoRepository.Create((int)userId!, rso, addRSORequest.MemberEmails);
 
 		if (rso == null)
 		{
@@ -50,8 +81,6 @@ public class RSOController(
 		}
 
 		// Update user role to admin if user is a student
-		var user = await this.userRepository.GetById((int)userId);
-
 		if (user != null && user.UserRole == "Student")
 		{
 			await this.userRepository.UpdateUserRole((int)userId, "Admin");

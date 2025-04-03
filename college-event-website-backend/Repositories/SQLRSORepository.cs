@@ -11,7 +11,7 @@ public class SQLRSORepository(
 	private readonly IConfiguration configuration = configuration;
 
 	// Create RSO
-	public async Task<RSO?> Create(int adminId, RSO rso)
+	public async Task<RSO?> Create(int adminId, RSO rso, List<string> memberEmails)
 	{
 		using var connection = GetConnection();
 
@@ -41,9 +41,41 @@ public class SQLRSORepository(
 			// Get last inserted ID
 			var insertedId = await connection.QuerySingleAsync<int>("SELECT LAST_INSERT_ID()", transaction: transaction);
 
-			await transaction.CommitAsync();
-
 			rso.RSOID = insertedId;
+
+			// Verify email existence
+			var emailVerifyTasks = new List<Task<User?>>();
+
+			foreach (var email in memberEmails)
+			{
+				emailVerifyTasks.Add(connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE Email = @Email", new { Email = email }));
+			}
+
+			foreach (var res in await Task.WhenAll(emailVerifyTasks))
+			{
+				if (res == null)
+				{
+					return null;
+				}
+			}
+
+			// Add members
+			var memberInsertTasks = new List<Task<int>>();
+
+			foreach (var email in memberEmails)
+			{
+				memberInsertTasks.Add(connection.ExecuteAsync("INSERT INTO rso_members (RSOID, UID) VALUES (@RSOID, (SELECT UID FROM users WHERE EMAIL = @EMAIL))", new { RSOID = insertedId, EMAIL = email }));
+			}
+
+			foreach (var res in await Task.WhenAll(memberInsertTasks))
+			{
+				if (res == 0)
+				{
+					return null;
+				}
+			}
+
+			await transaction.CommitAsync();
 
 			return rso;
 		}

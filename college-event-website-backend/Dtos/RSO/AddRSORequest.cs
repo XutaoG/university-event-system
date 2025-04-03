@@ -9,4 +9,6 @@ public class AddRSORequest
 	[MinLength(2)]
 	[MaxLength(100)]
 	public string Name { get; set; } = null!;
+
+	public List<string> MemberEmails { get; set; } = [];
 }
