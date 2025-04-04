@@ -68,11 +68,24 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddSingleton<IAuthorizationHandler, UserRoleAuthorizationHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, UniversityFoundAuthorizationHandler>();
 
+// Add CORS
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("allowedOrigins", policy =>
+	{
+		policy.WithOrigins("http://localhost:4200")
+			.AllowAnyHeader()
+			.AllowAnyMethod()
+			.AllowCredentials();
+	});
+});
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseCors("allowedOrigins");
 
 app.UseAuthentication();
 app.UseAuthorization();
