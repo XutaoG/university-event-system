@@ -3,3 +3,26 @@
 	flex-direction: column;
 	gap: 56px;
 }
+
+.password-config-container {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.login-config {
+	display: flex;
+	justify-content: space-between;
+
+	input {
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+
+.remember-me-container {
+	display: flex;
+	justify-content: start;
+	gap: 4px;
+}

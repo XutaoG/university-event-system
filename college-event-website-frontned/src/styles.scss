@@ -15,4 +15,7 @@ body {
 
 button {
 	font-family: "Poppins", sans-serif;
+	&:hover {
+		cursor: pointer;
+	}
 }

@@ -6,17 +6,44 @@
 	</p>
 </div>
 
-<form class="auth-form">
+<form class="auth-form" [formGroup]="loginForm" (ngSubmit)="submit()">
 	<div class="auth-form__input-container">
+		<!-- Email -->
 		<div class="input">
-			<p>Email</p>
-			<input type="email" placeholder="Email" />
+			<label for="email">Email</label>
+			<input
+				id="email"
+				type="email"
+				placeholder="Email"
+				formControlName="email"
+			/>
 		</div>
-		<div class="input">
-			<p>Password</p>
-			<input type="password" placeholder="Password" />
+
+		<!-- Password + Remember + Forgot password -->
+		<div class="password-config-container">
+			<!-- Password -->
+			<div class="input">
+				<label for="password">Password</label>
+				<input
+					id="password"
+					type="password"
+					placeholder="Password"
+					formControlName="password"
+				/>
+			</div>
+
+			<div class="login-config">
+				<!-- Remember Me -->
+				<div class="remember-me-container">
+					<input type="checkbox" />
+					<p>Remember Me</p>
+				</div>
+
+				<!-- Forgot Password -->
+				<a routerLink="">Forgot password</a>
+			</div>
 		</div>
 	</div>
 
-	<button class="auth-form__submit-button">Login</button>
+	<button class="auth-form__submit-button" type="submit">Login</button>
 </form>

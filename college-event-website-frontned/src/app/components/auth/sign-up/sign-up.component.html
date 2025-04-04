@@ -8,25 +8,43 @@
 
 <form class="auth-form">
 	<div class="auth-form__input-container">
+		<!-- Username -->
 		<div class="input">
-			<p>Username</p>
-			<input type="text" placeholder="Username" />
+			<label for="username">Username</label>
+			<input id="username" type="text" placeholder="Username" />
 		</div>
+
+		<!-- Email -->
 		<div class="input">
-			<p>Email</p>
-			<input type="email" placeholder="Email" />
+			<label for="email">Email</label>
+			<input id="email" type="email" placeholder="Email" />
 		</div>
+
+		<!-- Password -->
 		<div class="input">
-			<p>Password</p>
-			<input type="password" placeholder="Password" />
+			<label for="password">Password</label>
+			<input id="password" type="password" placeholder="Password" />
 		</div>
+
+		<!-- Confirm Password -->
 		<div class="input">
-			<p>Confirm Password</p>
-			<input type="password" placeholder="Confirm Password" />
+			<label for="confirm-password">Confirm Password</label>
+			<input
+				id="confirm-password"
+				type="password"
+				placeholder="Confirm Password"
+			/>
 		</div>
+
+		<!-- Role -->
 		<div class="input">
-			<p>Role</p>
-			<select class="role-select" type="text" placeholder="Role">
+			<label for="role">Role</label>
+			<select
+				id="role"
+				class="role-select"
+				type="text"
+				placeholder="Role"
+			>
 				<option value="student">Student</option>
 				<option value="admin">Admin</option>
 				<option value="superAdmin">Super Admin</option>
