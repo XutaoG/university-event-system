@@ -1,0 +1,38 @@
+<div class="salutation">
+	<h1>Sign Up for an Account</h1>
+	<p>
+		Already have an account?
+		<a routerLink="/login">login Here!</a>
+	</p>
+</div>
+
+<form class="auth-form">
+	<div class="auth-form__input-container">
+		<div class="input">
+			<p>Username</p>
+			<input type="text" placeholder="Username" />
+		</div>
+		<div class="input">
+			<p>Email</p>
+			<input type="email" placeholder="Email" />
+		</div>
+		<div class="input">
+			<p>Password</p>
+			<input type="password" placeholder="Password" />
+		</div>
+		<div class="input">
+			<p>Confirm Password</p>
+			<input type="password" placeholder="Confirm Password" />
+		</div>
+		<div class="input">
+			<p>Role</p>
+			<select class="role-select" type="text" placeholder="Role">
+				<option value="student">Student</option>
+				<option value="admin">Admin</option>
+				<option value="superAdmin">Super Admin</option>
+			</select>
+		</div>
+	</div>
+
+	<button class="auth-form__submit-button">Sign Up</button>
+</form>
