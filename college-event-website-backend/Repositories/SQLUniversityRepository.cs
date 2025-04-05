@@ -89,6 +89,8 @@ public class SQLUniversityRepository(IConfiguration configuration) : IUniversity
 				return null;
 			}
 
+			await transaction.CommitAsync();
+
 			return foundUniversity;
 		}
 		catch (Exception)
