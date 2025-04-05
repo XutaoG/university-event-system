@@ -6,8 +6,13 @@
 			<!-- Logo + Logout -->
 			<div class="user-controls">
 				<div class="user-controls__logo">EventTabs</div>
-				<button type="button" class="user-controls__logout-button">
-					<mat-icon>close</mat-icon>
+				<button
+					type="button"
+					class="user-controls__logout-button"
+					(click)="logout()"
+				>
+					<mat-icon>exit_to_app</mat-icon>
+					Logout
 				</button>
 			</div>
 		</div>

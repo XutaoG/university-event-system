@@ -46,7 +46,6 @@ export const routes: Routes = [
 	// Home page
 	{
 		path: '',
-		pathMatch: 'prefix',
 		loadComponent: async () => {
 			const m = await import(
 				'./components/home-container/home-container.component'
@@ -57,11 +56,26 @@ export const routes: Routes = [
 		children: [
 			{
 				path: 'home',
-				pathMatch: 'prefix',
 				title: 'Home',
 				loadComponent: async () => {
 					const m = await import('./pages/home/home.component');
 					return m.HomeComponent;
+				},
+			},
+			{
+				path: 'event',
+				title: 'Events',
+				loadComponent: async () => {
+					const m = await import('./pages/event/event.component');
+					return m.EventComponent;
+				},
+			},
+			{
+				path: 'rso',
+				title: 'RSOs',
+				loadComponent: async () => {
+					const m = await import('./pages/rso/rso.component');
+					return m.RsoComponent;
 				},
 			},
 		],

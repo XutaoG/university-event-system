@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
 	FormBuilder,
 	FormControl,
-	FormGroup,
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
@@ -11,10 +10,12 @@ import { LoginForm } from '../../../types/auth-types';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
 import { HttpStatusCode } from '@angular/common/http';
+import { EMPTY, switchMap, tap } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
 	selector: 'app-login',
-	imports: [RouterLink, ReactiveFormsModule, CommonModule],
+	imports: [RouterLink, ReactiveFormsModule, CommonModule, MatIconModule],
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss', '../auth-styles.scss'],
 })
@@ -22,6 +23,14 @@ export class LoginComponent {
 	authService = inject(AuthService);
 	router = inject(Router);
 	formBuilder = inject(FormBuilder);
+
+	isFetching = signal(false);
+
+	constructor() {
+		this.authService.user$.subscribe((user) => {
+			console.log('USER: ' + user);
+		});
+	}
 
 	loginForm = this.formBuilder.group({
 		email: new FormControl<string>('', {
@@ -36,17 +45,31 @@ export class LoginComponent {
 
 	submit() {
 		if (this.loginForm.valid) {
+			this.isFetching.set(true);
+
 			// Assemble form data
 			const formData: LoginForm = {
 				email: this.loginForm.value.email!,
 				password: this.loginForm.value.password!,
 			};
 
-			this.authService.login(formData).subscribe((response) => {
-				if (response.status == HttpStatusCode.Ok) {
-					this.router.navigateByUrl('/home');
-				}
-			});
+			this.authService
+				.login(formData)
+				.pipe(
+					switchMap((response) => {
+						console.log(response.status);
+						if (response.status == HttpStatusCode.Ok) {
+							return this.authService.getUser();
+						}
+						return EMPTY;
+					})
+				)
+				.subscribe((user) => {
+					if (user != null) {
+						this.router.navigateByUrl('/home');
+					}
+					this.isFetching.set(false);
+				});
 		}
 	}
 }

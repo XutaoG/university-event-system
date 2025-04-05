@@ -23,6 +23,7 @@
 		flex-grow: 1;
 		background-color: white;
 		border-radius: 6px;
+		padding: 16px;
 	}
 }
 
@@ -47,22 +48,25 @@
 		color: white;
 		border-radius: 4px;
 		background: variables.$primary-gradient;
+
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
 	}
 
 	&__logout-button {
-		margin-right: 16px;
+		// margin-right: 16px;
 		background-color: white;
-		border-radius: 100%;
-		aspect-ratio: 1;
+		border-radius: 100px;
 		color: white;
 		background-color: red;
-		padding: 4px;
+		padding: 6px 10px;
 		min-width: fit-content;
 		min-height: fit-content;
 
 		display: flex;
 		justify-content: center;
 		align-items: end;
+		gap: 4px;
+		font-weight: 600;
 
 		mat-icon {
 			font-size: 18px;

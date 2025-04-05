@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { catchError, map, of } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 
 export const redirectHomeGuard: CanActivateChildFn = (route, state) => {
 	const router = inject(Router);

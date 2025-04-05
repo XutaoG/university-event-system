@@ -5,14 +5,19 @@ import {
 	apiSignUpRoute,
 	apiLoginRoute,
 	apiGetUserRoute,
+	apiLogoutRoute,
 } from '../../constants/api-routes';
 import { SignUpForm, LoginForm, User } from '../../types/auth-types';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthService {
-	http = inject(HttpClient);
+	private http = inject(HttpClient);
+	private userSubject = new BehaviorSubject<User | null>(null);
+
+	user$ = this.userSubject.asObservable();
 
 	public signUp(signUpReq: SignUpForm) {
 		const url = environment.apiUrl + apiSignUpRoute;
@@ -32,9 +37,27 @@ export class AuthService {
 
 	public getUser() {
 		const url = environment.apiUrl + apiGetUserRoute;
-		return this.http.get<User>(url, {
-			observe: 'response',
-			withCredentials: true,
-		});
+		return this.http
+			.get<User>(url, {
+				withCredentials: true,
+			})
+			.pipe(
+				tap((user) => {
+					this.userSubject.next(user);
+				})
+			);
+	}
+
+	public logout() {
+		const url = environment.apiUrl + apiLogoutRoute;
+		return this.http.post<void>(url, null, { withCredentials: true }).pipe(
+			tap(() => {
+				this.userSubject.next(null);
+			})
+		);
+	}
+
+	private setUser(user: User | null) {
+		this.userSubject.next(user);
 	}
 }

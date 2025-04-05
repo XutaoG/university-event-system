@@ -8,12 +8,12 @@ export const routes: Route[] = [
 	},
 	{
 		header: 'Events',
-		routeTo: '/events',
+		routeTo: '/event',
 		icon: 'event',
 	},
 	{
 		header: 'RSOs',
-		routeTo: '/rsos',
+		routeTo: '/rso',
 		icon: 'group',
 	},
 ];

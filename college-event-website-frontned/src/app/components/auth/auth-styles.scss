@@ -61,6 +61,19 @@
 		font-size: 18px;
 		font-weight: 600;
 
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		mat-icon {
+			animation: spin 1s linear infinite;
+			@keyframes spin {
+				to {
+					transform: rotate(-360deg);
+				}
+			}
+		}
+
 		&:hover {
 			background-color: black;
 			color: white;
