@@ -1,0 +1,46 @@
+@use "../../../styles/variables.scss";
+
+.tabs {
+	padding-left: 24px;
+	display: flex;
+	justify-content: start;
+
+	> .tab {
+		padding: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		width: 216px;
+		border-radius: 6px 6px 0 0;
+		font-size: 18px;
+
+		display: flex;
+		align-items: center;
+		gap: 4px;
+
+		background-color: variables.$primary-gray;
+		border-right: 2px solid rgba(0, 0, 0, 0.1);
+		border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+		color: variables.$font-gray;
+		font-weight: 500;
+
+		&.active {
+			background-color: white;
+			font-weight: 600;
+			border-right: 2px solid rgba(0, 0, 0, 0.2);
+			border-bottom: none;
+		}
+
+		mat-icon {
+			color: variables.$font-gray-light-1;
+			font-size: 22px;
+			width: 22px;
+			height: 22px;
+			vertical-align: middle;
+		}
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+}

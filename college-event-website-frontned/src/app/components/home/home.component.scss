@@ -33,37 +33,6 @@
 	padding-top: 8px;
 }
 
-.tabs {
-	// padding-left: 12px;
-	// padding-top: 12px;
-	padding-left: 24px;
-	display: flex;
-	justify-content: start;
-
-	> .tab {
-		padding: 8px;
-		padding-left: 8px;
-		padding-right: 8px;
-		width: 216px;
-		background-color: white;
-		border-radius: 6px 6px 0 0;
-
-		font-weight: 600;
-		color: variables.$font-gray;
-		font-size: 18px;
-
-		border-right: 2px solid rgba(0, 0, 0, 0.2);
-
-		&--inactive {
-			background-color: variables.$primary-gray;
-			border-right: 2px solid rgba(0, 0, 0, 0.05);
-			border-bottom: 2px solid rgba(0, 0, 0, 0.05);
-			color: variables.$font-gray;
-			font-weight: 500;
-		}
-	}
-}
-
 .user-controls {
 	display: flex;
 	align-items: center;
