@@ -1,1 +1,24 @@
-<p>home works!</p>
+<div class="full-screen home-page">
+	<div class="home-container">
+		<div class="home-control">
+			<!-- Tabs -->
+			<div class="tabs">
+				<div class="tab">Home</div>
+				<div class="tab tab--inactive">Public Events</div>
+				<div class="tab tab--inactive">Private Events</div>
+				<div class="tab tab--inactive">RSOs</div>
+			</div>
+
+			<!-- Logo + Logout -->
+			<div class="user-controls">
+				<div class="user-controls__logo">EventTabs</div>
+				<button type="button" class="user-controls__logout-button">
+					<mat-icon (click)="test()">close</mat-icon>
+				</button>
+			</div>
+		</div>
+		<div class="page-container">
+			<router-outlet />
+		</div>
+	</div>
+</div>

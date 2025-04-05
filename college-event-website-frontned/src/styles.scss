@@ -14,8 +14,15 @@ body {
 }
 
 button {
+	outline: none;
+	border: none;
 	font-family: "Poppins", sans-serif;
 	&:hover {
 		cursor: pointer;
 	}
+}
+
+.full-screen {
+	min-width: 100vw;
+	min-height: 100vh;
 }

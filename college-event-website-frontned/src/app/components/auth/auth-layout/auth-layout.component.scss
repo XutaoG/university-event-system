@@ -1,15 +1,10 @@
 @use "../../../styles/variables.scss";
 
-.full-screen {
-	min-width: 100vw;
-	min-height: 100vh;
-}
-
 .auth-page {
 	display: flex;
 	justify-content: stretch;
 	align-items: stretch;
-	padding: 20px;
+	padding: 12px;
 }
 
 .auth-container {
@@ -18,12 +13,8 @@
 	flex-direction: row;
 	border-radius: 8px;
 
-	background: linear-gradient(
-		180deg,
-		variables.$primary-purple,
-		variables.$primary-rose
-	);
-	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+	background: variables.$primary-gradient;
+	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
 
 	&__side-bar {
 		background-color: white;
