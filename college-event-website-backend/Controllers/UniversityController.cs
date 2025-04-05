@@ -82,10 +82,11 @@ public class UniversityController(
 
 		var university = this.mapper.Map<University>(updateUniversityRequest);
 
-		// Check if user permission
-		if (user.UniversityID != university.UniversityID)
+		var foundUniversity = await this.universityRepository.GetById((int)user.UniversityID);
+
+		if (foundUniversity == null)
 		{
-			return Unauthorized();
+			return NotFound();
 		}
 
 		// Update uni
