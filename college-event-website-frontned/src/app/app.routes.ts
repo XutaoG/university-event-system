@@ -8,14 +8,12 @@ export const routes: Routes = [
 		pathMatch: 'full',
 		redirectTo: '/home',
 	},
-	// Authentication page
 	{
 		path: '',
+		pathMatch: 'prefix',
 		loadComponent: async () => {
-			const m = await import(
-				'./components/auth/auth-layout/auth-layout.component'
-			);
-			return m.AuthLayoutComponent;
+			const m = await import('./pages/auth/auth.component');
+			return m.AuthComponent;
 		},
 		canActivate: [redirectHomeGuard],
 		children: [
@@ -47,13 +45,26 @@ export const routes: Routes = [
 	},
 	// Home page
 	{
-		path: 'home',
-		pathMatch: 'full',
+		path: '',
+		pathMatch: 'prefix',
 		loadComponent: async () => {
-			const m = await import('./components/home/home.component');
-			return m.HomeComponent;
+			const m = await import(
+				'./components/home-container/home-container.component'
+			);
+			return m.HomeContainerComponent;
 		},
 		canActivate: [authGuard],
+		children: [
+			{
+				path: 'home',
+				pathMatch: 'prefix',
+				title: 'Home',
+				loadComponent: async () => {
+					const m = await import('./pages/home/home.component');
+					return m.HomeComponent;
+				},
+			},
+		],
 	},
 	{
 		path: '**',

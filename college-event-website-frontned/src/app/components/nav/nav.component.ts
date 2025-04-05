@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { routes } from '../../../constants/routes';
+import { routes } from '../../constants/routes';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

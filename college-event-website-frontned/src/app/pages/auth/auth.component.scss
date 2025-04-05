@@ -1,4 +1,4 @@
-@use "../../../styles/variables.scss";
+@use "../../styles/variables.scss";
 
 .auth-page {
 	display: flex;
@@ -31,6 +31,5 @@
 
 	&__image-container {
 		flex-grow: 1;
-		// border-radius: 8px;
 	}
 }
