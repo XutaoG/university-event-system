@@ -1,9 +1,7 @@
 <!-- Tabs -->
-<div class="tabs">
-	@for (route of routes; track route.header) {
-	<div class="tab" [routerLink]="route.routeTo" routerLinkActive="active">
-		<mat-icon>{{ route.icon }}</mat-icon>
-		{{ route.header }}
-	</div>
-	}
+@for (route of routes; track route.header) {
+<div class="tab" [routerLink]="route.routeTo" routerLinkActive="active">
+	<mat-icon>{{ route.icon }}</mat-icon>
+	{{ route.header }}
 </div>
+}

@@ -1,6 +1,6 @@
 @use "../../styles/variables.scss";
 
-.tabs {
+:host {
 	padding-left: 24px;
 	display: flex;
 	justify-content: start;
