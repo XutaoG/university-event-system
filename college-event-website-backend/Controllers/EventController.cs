@@ -448,7 +448,21 @@ public class EventController(
 
 		var publicEvents = await this.eventRepository.GetAllPublicEvents();
 
+		var locationTasks = new List<Task<Location>>();
+
+		for (int i = 0; i < publicEvents.Count; i++)
+		{
+			locationTasks.Add(this.locationRepository.GetById(publicEvents[i].LocID)!);
+		}
+
 		var response = this.mapper.Map<PublicEventResponse[]>(publicEvents);
+
+		var locations = await Task.WhenAll(locationTasks);
+
+		for (int i = 0; i < locations.Length; i++)
+		{
+			response[i].Location = this.mapper.Map<LocationResponse>(locations[i]);
+		}
 
 		return Ok(response);
 	}
@@ -471,16 +485,30 @@ public class EventController(
 			return Unauthorized();
 		}
 
+		var locationTasks = new List<Task<Location>>();
+
 		var privateEvents = await this.eventRepository.GetAllPrivateEvents((int)user.UniversityID);
 
-		var response = this.mapper.Map<PrivateEvent[]>(privateEvents);
+		for (int i = 0; i < privateEvents.Count; i++)
+		{
+			locationTasks.Add(this.locationRepository.GetById(privateEvents[i].LocID)!);
+		}
+
+		var response = this.mapper.Map<PrivateEventResponse[]>(privateEvents);
+
+		var locations = await Task.WhenAll(locationTasks);
+
+		for (int i = 0; i < locations.Length; i++)
+		{
+			response[i].Location = this.mapper.Map<LocationResponse>(locations[i]);
+		}
 
 		return Ok(response);
 	}
 
-	[Route("rso/")]
+	[Route("rso/all/{rsoId}")]
 	[HttpGet]
-	public async Task<IActionResult> GetAllRsoEvents()
+	public async Task<IActionResult> GetAllRsoEvents([FromRoute] int rsoId)
 	{
 		int? userId = this.jwtTokenService.GetUserIdFromClaims(HttpContext.User.Claims.ToList());
 
@@ -497,6 +525,7 @@ public class EventController(
 		}
 
 		var rsos = await this.rsoRepository.GetAllByStudentId((int)userId);
+		rsos.AddRange(await this.rsoRepository.GetAllByAdminId((int)userId));
 
 		var rsoEventTasks = new List<Task<List<RSOEvent>>>();
 

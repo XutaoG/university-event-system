@@ -6,11 +6,9 @@ using MySql.Data.MySqlClient;
 namespace CollegeEvent.API.Repositories;
 
 public class SQLEventRepository(
-	IConfiguration configuration,
-	IMapper mapper) : IEventRepository
+	IConfiguration configuration) : IEventRepository
 {
 	private readonly IConfiguration configuration = configuration;
-	private readonly IMapper mapper = mapper;
 
 	public async Task<PublicEvent?> CreatePublicEvent(PublicEvent publicEvent)
 	{
