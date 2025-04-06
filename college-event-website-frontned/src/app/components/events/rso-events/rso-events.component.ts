@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
-import { RsoEventsService } from '../../services/events/rso-events/rso-events.service';
-import { VerticalContainerComponent } from '../vertical-container/vertical-container.component';
+import { RsoEventsService } from '../../../services/events/rso-events/rso-events.service';
+import { VerticalContainerComponent } from '../../vertical-container/vertical-container.component';
 import { EventContainerComponent } from '../event-container/event-container.component';
-import { RsoEvent } from '../../types/event-types';
+import { RsoEvent } from '../../../types/event-types';
 
 @Component({
 	selector: 'app-rso-events',

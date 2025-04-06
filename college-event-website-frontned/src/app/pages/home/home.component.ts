@@ -6,7 +6,7 @@ import { roleMap } from '../../types/auth-types';
 import { MatIconModule } from '@angular/material/icon';
 import { RsoService } from '../../services/rso/rso.service';
 import { RsoJoinedComponent } from '../../components/rso/rso-joined/rso-joined.component';
-import { RsoEventsComponent } from '../../components/rso-events/rso-events.component';
+import { RsoEventsComponent } from '../../components/events/rso-events/rso-events.component';
 import { UniversityInfoComponent } from '../../components/university-info/university-info.component';
 
 @Component({

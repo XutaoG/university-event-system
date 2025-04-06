@@ -1,6 +1,6 @@
 import { Component, input, OnInit } from '@angular/core';
-import { CardContainerComponent } from '../card-container/card-container.component';
-import { EventT } from '../../types/event-types';
+import { CardContainerComponent } from '../../card-container/card-container.component';
+import { EventT } from '../../../types/event-types';
 
 @Component({
 	selector: 'app-event-container',
