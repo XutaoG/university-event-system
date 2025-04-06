@@ -31,7 +31,7 @@ public class SQLRSORepository(
 
 			// Insert RSO into DB
 			rso.AdminID = adminId;
-			var numRowUpdated = await connection.ExecuteAsync("INSERT INTO RSOs (Name, UniversityID, AdminID, Active) VALUES (@Name, @UniversityID, @AdminID, false)", rso);
+			var numRowUpdated = await connection.ExecuteAsync("INSERT INTO RSOs (Name, Description, UniversityID, AdminID, Active) VALUES (@Name, @Description, @UniversityID, @AdminID, false)", rso);
 
 			if (numRowUpdated == 0)
 			{
@@ -119,9 +119,10 @@ public class SQLRSORepository(
 			}
 
 			foundRso.Name = rso.Name;
+			foundRso.Description = rso.Description;
 
 			// Update RSO
-			var numRowUpdated = await connection.ExecuteAsync("UPDATE rsos SET Name = @Name WHERE RSOID = @RSOID", new { foundRso.Name, RSOID = id });
+			var numRowUpdated = await connection.ExecuteAsync("UPDATE rsos SET Name = @Name, Description = @Description WHERE RSOID = @RSOID", foundRso);
 
 			if (numRowUpdated == 0)
 			{
@@ -252,7 +253,7 @@ public class SQLRSORepository(
 
 		try
 		{
-			var rsos = await connection.QueryAsync<RSO>("SELECT * FROM rsos WHERE RSOID NOT IN (SELECT RSOID FROM rso_members WHERE UID = @UID)", new { UID = id });
+			var rsos = await connection.QueryAsync<RSO>("SELECT * FROM rsos WHERE RSOID NOT IN (SELECT RSOID FROM rso_members WHERE UID = @UID) AND AdminID != @UID", new { UID = id });
 			return rsos.ToList();
 		}
 		catch (Exception)
