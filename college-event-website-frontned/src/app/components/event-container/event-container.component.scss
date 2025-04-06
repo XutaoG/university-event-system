@@ -1,0 +1,72 @@
+@use "../../styles/variables.scss";
+
+.event {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+
+	min-width: 360px;
+	max-width: 360px;
+
+	color: variables.$font-gray;
+
+	&__title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: black;
+	}
+
+	&__name {
+		font-weight: 600;
+	}
+
+	&__date {
+		background-color: white;
+		border-radius: 100px;
+		padding: 0 8px;
+		font-weight: 500;
+		border: 1px solid variables.$primary-gray-dark-1;
+	}
+
+	&__line-break {
+		background-color: variables.$primary-gray-dark-1;
+	}
+
+	&__time {
+		> span {
+			font-weight: 500;
+		}
+	}
+
+	&__location {
+		text-overflow: ellipsis;
+		> span {
+			font-weight: 500;
+		}
+	}
+
+	&__description {
+		height: 96px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		> span {
+			font-weight: 500;
+		}
+	}
+
+	&__view-details-button {
+		align-self: flex-end;
+		background-color: white;
+		border-radius: 6px;
+		padding: 4px 8px;
+		border: 2px solid black;
+
+		&:hover {
+			background-color: black;
+			color: white;
+		}
+	}
+}

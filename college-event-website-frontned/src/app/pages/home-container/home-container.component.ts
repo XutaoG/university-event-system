@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterOutlet } from '@angular/router';
-import { NavComponent } from '../nav/nav.component';
 import { AuthService } from '../../services/auth/auth.service';
+import { NavComponent } from '../../components/nav/nav.component';
 
 @Component({
 	selector: 'app-home-container',
@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth/auth.service';
 	templateUrl: './home-container.component.html',
 	styleUrl: './home-container.component.scss',
 })
-export class HomeContainerComponent {
+export class HomeContainerComponent implements OnInit {
 	authService = inject(AuthService);
 	router = inject(Router);
 
@@ -18,5 +18,9 @@ export class HomeContainerComponent {
 		this.authService.logout().subscribe(() => {
 			this.router.navigateByUrl('/login');
 		});
+	}
+
+	ngOnInit() {
+		this.authService.getUser().subscribe();
 	}
 }

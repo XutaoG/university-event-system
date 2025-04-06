@@ -1,0 +1,38 @@
+@use "../../../styles/variables.scss";
+
+.rso {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	min-width: 380px;
+	max-width: 380px;
+
+	&__name {
+		font-size: 18px;
+		font-weight: 600;
+	}
+
+	&__line-break {
+		background-color: variables.$primary-gray-dark-1;
+	}
+
+	&__description {
+		height: 156px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	&__view-details-button {
+		align-self: flex-end;
+		background-color: white;
+		border-radius: 6px;
+		padding: 4px 8px;
+		border: 2px solid black;
+
+		&:hover {
+			background-color: black;
+			color: white;
+		}
+	}
+}

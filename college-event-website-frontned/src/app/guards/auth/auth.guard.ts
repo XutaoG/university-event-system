@@ -25,6 +25,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 			if (val != null) {
 				return true;
 			}
+
 			return false;
 		}),
 		catchError(() => {

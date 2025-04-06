@@ -7,6 +7,9 @@
 	margin: 0;
 	padding: 0;
 	outline: none;
+	max-width: 100%;
+	// max-height: 100%;
+	// min-height: 0px;
 }
 
 body {
@@ -17,12 +20,27 @@ button {
 	outline: none;
 	border: none;
 	font-family: "Poppins", sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+
 	&:hover {
 		cursor: pointer;
 	}
 }
 
-.full-screen {
-	min-width: 100vw;
-	min-height: 100vh;
+mat-icon {
+	&.spin {
+		animation: spin 1s linear infinite;
+		@keyframes spin {
+			to {
+				transform: rotate(-360deg);
+			}
+		}
+	}
+}
+
+div {
+	&.line-break {
+		height: 2px;
+	}
 }

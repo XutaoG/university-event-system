@@ -1,0 +1,24 @@
+@if ((university$ | async); as university;) { @if (university != null) {
+<!-- <div class="university"> -->
+<p class="university__title">University Information</p>
+<p class="university__general-information">
+	<span class="university__name">{{ university.name }}</span> |
+	<span class="university__location">{{ university.location }}</span> |
+	<span class="university__domain">{{ university.domain }}</span>
+</p>
+
+<div class="university__information">
+	@if (university.description != null) {
+	<p class="university__description">
+		Description: <span>{{ university.description }}</span>
+	</p>
+	}
+
+	<p class="university__num-students">
+		Student Count: <span>{{ university.numStudents }} </span>
+	</p>
+</div>
+<!-- </div> -->
+} } @else {
+<mat-icon class="university__load spin">replay icon</mat-icon>
+}

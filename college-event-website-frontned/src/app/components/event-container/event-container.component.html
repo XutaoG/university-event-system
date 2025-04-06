@@ -1,0 +1,19 @@
+<app-card-container class="event">
+	<div class="event__title">
+		<p class="event__name">{{ event().name }}</p>
+		<p class="event__date">{{ eventDateParsed }}</p>
+	</div>
+	<div class="line-break event__line-break"></div>
+	<p class="event__time">
+		<span>Time: </span>{{ eventTimeParsed }} - {{ eventTimeEndParsed }}
+	</p>
+	<p class="event__location">
+		<span>Location: </span>{{ event().location.name }}
+	</p>
+	<p class="event__description">
+		<span>Description: </span> {{ event().description }}
+	</p>
+	<button class="event__view-details-button" type="button">
+		View Detail
+	</button>
+</app-card-container>

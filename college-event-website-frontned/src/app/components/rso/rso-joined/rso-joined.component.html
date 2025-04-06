@@ -1,0 +1,5 @@
+<app-vertical-container containerTitle="Enrolled RSOs">
+	@for (rso of joinedRsos; track rso.rsoid) {
+	<app-rso-container [rso]="rso" />
+	}
+</app-vertical-container>

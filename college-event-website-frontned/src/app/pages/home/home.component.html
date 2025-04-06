@@ -1,1 +1,14 @@
+<!-- Welcome message -->
+@if ((user$ | async); as user) {
+<p class="welcome-message">Welcome, {{ user?.name }}</p>
+<!-- <p class="role-display">Role: {{ userRole }}</p> -->
+}
 
+<!-- University -->
+<app-university-info />
+
+<!-- Joined RSOs -->
+<app-rso-joined />
+
+<!-- RSO Events -->
+<app-rso-events />

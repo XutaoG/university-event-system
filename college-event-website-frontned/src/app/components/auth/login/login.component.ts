@@ -26,11 +26,7 @@ export class LoginComponent {
 
 	isFetching = signal(false);
 
-	constructor() {
-		this.authService.user$.subscribe((user) => {
-			console.log('USER: ' + user);
-		});
-	}
+	constructor() {}
 
 	loginForm = this.formBuilder.group({
 		email: new FormControl<string>('', {
@@ -57,7 +53,6 @@ export class LoginComponent {
 				.login(formData)
 				.pipe(
 					switchMap((response) => {
-						console.log(response.status);
 						if (response.status == HttpStatusCode.Ok) {
 							return this.authService.getUser();
 						}

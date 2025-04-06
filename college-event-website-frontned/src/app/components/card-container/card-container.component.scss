@@ -1,0 +1,8 @@
+@use "../../styles/variables.scss";
+
+:host {
+	// padding: 20px;
+	background-color: variables.$primary-gray;
+	border-radius: 6px;
+	border: 1px solid variables.$primary-gray-dark-1;
+}

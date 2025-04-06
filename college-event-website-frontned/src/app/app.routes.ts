@@ -48,7 +48,7 @@ export const routes: Routes = [
 		path: '',
 		loadComponent: async () => {
 			const m = await import(
-				'./components/home-container/home-container.component'
+				'./pages/home-container/home-container.component'
 			);
 			return m.HomeContainerComponent;
 		},

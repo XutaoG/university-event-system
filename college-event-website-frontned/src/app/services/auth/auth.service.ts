@@ -8,7 +8,15 @@ import {
 	apiLogoutRoute,
 } from '../../constants/api-routes';
 import { SignUpForm, LoginForm, User } from '../../types/auth-types';
-import { BehaviorSubject, tap } from 'rxjs';
+import {
+	BehaviorSubject,
+	catchError,
+	EMPTY,
+	NotFoundError,
+	of,
+	tap,
+	throwError,
+} from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
