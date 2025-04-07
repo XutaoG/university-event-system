@@ -15,14 +15,12 @@ export class EventContainerComponent implements OnInit {
 	eventTimeParsed = '';
 	eventTimeEndParsed = '';
 
-	// eventTimeEndParsed = new Date(this.event_().eventTimeEnd).getHours;
-
 	ngOnInit() {
 		// Parse date
 		const eventDate = new Date(this.event().eventDate);
 		this.eventDateParsed = `${
 			eventDate.getMonth() + 1
-		}/${eventDate.getDay()}/${eventDate
+		}/${eventDate.getDate()}/${eventDate
 			.getFullYear()
 			.toString()
 			.substring(2)}`;
