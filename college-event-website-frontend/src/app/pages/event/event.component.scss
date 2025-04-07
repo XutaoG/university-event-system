@@ -12,3 +12,9 @@
 	width: 4px;
 	background-color: variables.$primary-gray-dark-1;
 }
+
+.center {
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+}

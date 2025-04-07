@@ -3,10 +3,11 @@ import { PrivateEventsService } from '../../../services/events/private-events/pr
 import { PrivateEvent } from '../../../types/event-types';
 import { VerticalContainerComponent } from '../../vertical-container/vertical-container.component';
 import { EventContainerComponent } from '../event-container/event-container.component';
+import { GridContainerComponent } from '../../grid-container/grid-container.component';
 
 @Component({
 	selector: 'app-private-events',
-	imports: [VerticalContainerComponent, EventContainerComponent],
+	imports: [EventContainerComponent, GridContainerComponent],
 	templateUrl: './private-events.component.html',
 	styleUrl: './private-events.component.scss',
 })

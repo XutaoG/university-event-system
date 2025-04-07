@@ -3,10 +3,11 @@ import { RsoEventsService } from '../../../services/events/rso-events/rso-events
 import { VerticalContainerComponent } from '../../vertical-container/vertical-container.component';
 import { EventContainerComponent } from '../event-container/event-container.component';
 import { RsoEvent } from '../../../types/event-types';
+import { GridContainerComponent } from '../../grid-container/grid-container.component';
 
 @Component({
 	selector: 'app-rso-events',
-	imports: [VerticalContainerComponent, EventContainerComponent],
+	imports: [EventContainerComponent, GridContainerComponent],
 	templateUrl: './rso-events.component.html',
 	styleUrl: './rso-events.component.scss',
 })

@@ -1,5 +1,5 @@
-<app-vertical-container containerTitle="All Private Events">
+<app-grid-container containerTitle="All Private Events">
 	@for (privateEvent of privateEvents; track privateEvent.eventID) {
 	<app-event-container [event]="privateEvent" />
 	}
-</app-vertical-container>
+</app-grid-container>
