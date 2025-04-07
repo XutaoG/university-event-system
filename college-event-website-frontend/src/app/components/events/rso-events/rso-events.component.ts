@@ -1,9 +1,9 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RsoEventsService } from '../../../services/events/rso-events/rso-events.service';
-import { VerticalContainerComponent } from '../../vertical-container/vertical-container.component';
 import { EventContainerComponent } from '../event-container/event-container.component';
 import { RsoEvent } from '../../../types/event-types';
 import { GridContainerComponent } from '../../grid-container/grid-container.component';
+import { sortEventByDate } from '../../../utils';
 
 @Component({
 	selector: 'app-rso-events',
@@ -18,6 +18,7 @@ export class RsoEventsComponent implements OnInit {
 
 	ngOnInit() {
 		this.rsoEventService.getAllRsoEvents().subscribe((rsoEvents) => {
+			sortEventByDate(rsoEvents);
 			this.rsoEvents = rsoEvents;
 		});
 	}

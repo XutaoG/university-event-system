@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PublicEvent } from '../../../types/event-types';
 import { PublicEventsService } from '../../../services/events/public-events/public-events.service';
-import { VerticalContainerComponent } from '../../vertical-container/vertical-container.component';
 import { EventContainerComponent } from '../event-container/event-container.component';
 import { GridContainerComponent } from '../../grid-container/grid-container.component';
+import { sortEventByDate } from '../../../utils';
 
 @Component({
 	selector: 'app-public-events',
@@ -20,6 +20,7 @@ export class PublicEventsComponent implements OnInit {
 		this.publicEventService
 			.getAllPublicEvents()
 			.subscribe((publicEvents) => {
+				sortEventByDate(publicEvents);
 				this.publicEvents = publicEvents;
 			});
 	}

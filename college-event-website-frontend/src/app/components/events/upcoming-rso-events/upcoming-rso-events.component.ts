@@ -3,6 +3,7 @@ import { RsoEventsService } from '../../../services/events/rso-events/rso-events
 import { RsoEvent } from '../../../types/event-types';
 import { VerticalContainerComponent } from '../../vertical-container/vertical-container.component';
 import { EventContainerComponent } from '../event-container/event-container.component';
+import { sortEventByDate } from '../../../utils';
 
 @Component({
 	selector: 'app-upcoming-rso-events',
@@ -17,7 +18,9 @@ export class UpcomingRsoEventsComponent {
 
 	ngOnInit() {
 		this.rsoEventService.getAllRsoEvents().subscribe((rsoEvents) => {
-			this.rsoEvents = rsoEvents;
+			rsoEvents = sortEventByDate(rsoEvents);
+			const splicedArray = rsoEvents.slice(0, 5);
+			this.rsoEvents = splicedArray;
 		});
 	}
 }

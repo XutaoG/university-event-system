@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PrivateEventsService } from '../../../services/events/private-events/private-events.service';
 import { PrivateEvent } from '../../../types/event-types';
-import { VerticalContainerComponent } from '../../vertical-container/vertical-container.component';
 import { EventContainerComponent } from '../event-container/event-container.component';
 import { GridContainerComponent } from '../../grid-container/grid-container.component';
+import { sortEventByDate } from '../../../utils';
 
 @Component({
 	selector: 'app-private-events',
@@ -20,6 +20,7 @@ export class PrivateEventsComponent implements OnInit {
 		this.privateEventService
 			.getAllPrivateEvents()
 			.subscribe((privateEvents) => {
+				sortEventByDate(privateEvents);
 				this.privateEvents = privateEvents;
 			});
 	}
