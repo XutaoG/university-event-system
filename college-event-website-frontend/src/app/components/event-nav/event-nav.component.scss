@@ -1,0 +1,37 @@
+@use "../../styles/variables.scss";
+
+:host {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.event-nav {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 12px;
+	border-radius: 8px;
+	font-size: 18px;
+	font-weight: 500;
+	color: variables.$font-gray;
+
+	cursor: pointer;
+
+	text-wrap: nowrap;
+
+	&.active {
+		background-color: variables.$primary-gray;
+		border: 1px solid variables.$primary-gray-dark-1;
+	}
+
+	mat-icon {
+		font-size: 22px;
+		width: 22px;
+		height: 22px;
+	}
+
+	&:hover {
+		background-color: variables.$primary-gray;
+	}
+}

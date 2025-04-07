@@ -17,3 +17,22 @@ export const routes: Route[] = [
 		icon: 'group',
 	},
 ];
+
+export const eventRoutes: Route[] = [
+	{
+		header: 'RSO Events',
+		routeTo: '/event/rso',
+		icon: 'group',
+	},
+	{
+		header: 'Private Events',
+		routeTo: '/event/private',
+		icon: 'school',
+	},
+
+	{
+		header: 'Public Events',
+		routeTo: '/event/public',
+		icon: 'public',
+	},
+];

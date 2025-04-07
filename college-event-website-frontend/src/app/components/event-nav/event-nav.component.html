@@ -1,0 +1,6 @@
+@for (route of eventRoutes; track route.header) {
+<div class="event-nav" [routerLink]="route.routeTo" routerLinkActive="active">
+	<mat-icon>{{ route.icon }}</mat-icon>
+	{{ route.header }}
+</div>
+}
