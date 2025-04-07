@@ -3,14 +3,15 @@
 :host {
 	flex-grow: 1;
 	display: flex;
-	gap: 24px;
+	gap: 30px;
 	overflow: scroll;
 	min-width: 0;
 }
 
 .event-nav-line-break {
-	width: 4px;
+	width: 3px;
 	background-color: variables.$primary-gray-dark-1;
+	border-radius: 100px;
 }
 
 .center {

@@ -9,11 +9,9 @@
 .event-nav {
 	display: flex;
 	align-items: center;
-	gap: 6px;
+	gap: 12px;
 	padding: 8px 12px;
 	border-radius: 8px;
-	font-size: 18px;
-	font-weight: 500;
 	color: variables.$font-gray;
 
 	cursor: pointer;
