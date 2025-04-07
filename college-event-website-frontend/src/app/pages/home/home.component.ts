@@ -8,6 +8,7 @@ import { RsoService } from '../../services/rso/rso.service';
 import { RsoJoinedComponent } from '../../components/rso/rso-joined/rso-joined.component';
 import { RsoEventsComponent } from '../../components/events/rso-events/rso-events.component';
 import { UniversityInfoComponent } from '../../components/university-info/university-info.component';
+import { UpcomingRsoEventsComponent } from '../../components/events/upcoming-rso-events/upcoming-rso-events.component';
 
 @Component({
 	selector: 'app-home',
@@ -15,7 +16,7 @@ import { UniversityInfoComponent } from '../../components/university-info/univer
 		CommonModule,
 		MatIconModule,
 		RsoJoinedComponent,
-		RsoEventsComponent,
+		UpcomingRsoEventsComponent,
 		UniversityInfoComponent,
 	],
 	templateUrl: './home.component.html',
