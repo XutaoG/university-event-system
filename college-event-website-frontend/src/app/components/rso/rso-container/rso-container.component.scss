@@ -11,6 +11,10 @@
 	&__name {
 		font-size: 18px;
 		font-weight: 600;
+
+		text-wrap: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 
 	&__line-break {
@@ -18,7 +22,8 @@
 	}
 
 	&__description {
-		height: 156px;
+		min-height: 156px;
+		max-height: 156px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}

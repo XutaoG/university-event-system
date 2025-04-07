@@ -1,4 +1,4 @@
-<app-vertical-container containerTitle="Upcoming RSO Events">
+<app-vertical-container containerTitle="All RSO Events">
 	@for (rsoEvent of rsoEvents; track rsoEvent.eventID) {
 	<app-event-container [event]="rsoEvent" />
 	}

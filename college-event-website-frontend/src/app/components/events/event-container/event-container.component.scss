@@ -20,6 +20,10 @@
 
 	&__name {
 		font-weight: 600;
+
+		text-overflow: ellipsis;
+		text-wrap: nowrap;
+		overflow: hidden;
 	}
 
 	&__date {
@@ -42,13 +46,17 @@
 
 	&__location {
 		text-overflow: ellipsis;
+		text-wrap: nowrap;
+		overflow: hidden;
+
 		> span {
 			font-weight: 500;
 		}
 	}
 
 	&__description {
-		height: 96px;
+		min-height: 96px;
+		max-height: 96px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 

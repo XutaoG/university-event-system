@@ -1,0 +1,5 @@
+<app-vertical-container containerTitle="All Public Events">
+	@for (publicEvent of publicEvents; track publicEvent.eventID) {
+	<app-event-container [event]="publicEvent" />
+	}
+</app-vertical-container>

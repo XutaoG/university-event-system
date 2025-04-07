@@ -11,4 +11,6 @@ export const apiGetUniversityRoute = '/university';
 export const apiGetRsoJoined = '/rso/joined';
 
 // RSO Events
-export const apiGetRsoEventAllRoute = '/event/rso';
+export const apiGetRsoEventsAllRoute = '/event/rso';
+export const apiGetPublicEventsRoute = '/event/public';
+export const apiGetPrivateEventsRoute = '/event/private';
