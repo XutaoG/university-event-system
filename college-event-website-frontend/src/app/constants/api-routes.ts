@@ -24,3 +24,10 @@ export const apiGetPublicEventsRoute = '/event/public';
 
 // Private Events
 export const apiGetPrivateEventsRoute = '/event/private';
+
+// Comment
+export const apiAddCommentRoute = '/comment';
+export const apiGetCommentRoute = '/comment';
+export const apiUpdateCommentRoute = '/comment';
+export const apiDeleteCommentRoute = '/comment';
+export const apiGetCommentsByEventRoute = '/comment/event';

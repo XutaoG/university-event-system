@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@use "./app/styles/variables.scss";
+
 * {
 	box-sizing: border-box;
 }
@@ -39,5 +41,37 @@ mat-icon {
 div {
 	&.line-break {
 		height: 2px;
+	}
+}
+
+button {
+	background-color: white;
+	color: black;
+
+	&.danger {
+		border: 2px solid variables.$danger;
+
+		&:hover {
+			background-color: variables.$danger;
+			color: white;
+		}
+	}
+
+	&.primary {
+		border: 2px solid black;
+
+		&:hover {
+			background-color: black;
+			color: white;
+		}
+	}
+
+	&.safe {
+		border: 2px solid variables.$safe;
+
+		&:hover {
+			background-color: variables.$safe;
+			color: white;
+		}
 	}
 }

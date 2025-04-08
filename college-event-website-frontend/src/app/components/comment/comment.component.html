@@ -1,0 +1,45 @@
+<div class="comment__info">
+	<div>
+		<span>Rating: </span>
+		@if (isEditing) {
+		<input
+			type="number"
+			class="comment__info__rating-input"
+			[(ngModel)]="editCommentRating"
+			min="1"
+			max="5"
+		/>
+		}@else {
+		<span>{{ comment().rating }}</span>
+		} out of 5
+	</div>
+	<p>
+		By <span>{{ comment().userResponse.name }}</span>
+	</p>
+</div>
+<div class="comment__body">
+	@if (isEditing) {
+	<input class="comment__body__text-input" [(ngModel)]="editCommentText" />
+	}@else {
+	<p>{{ comment().text }}</p>
+	} @if (own()) {
+	<div class="comment__actions">
+		@if (isEditing) {
+		<button type="button" (click)="onEditCancel()">
+			<mat-icon>close</mat-icon>
+		</button>
+		} @if (isEditing) {
+		<button type="button" (click)="onEdit()">
+			<mat-icon>check</mat-icon>
+		</button>
+		} @else {
+		<button type="button" (click)="onEditToggle()">
+			<mat-icon>edit</mat-icon>
+		</button>
+		}
+		<button type="button" (click)="onDelete()">
+			<mat-icon>delete_outline</mat-icon>
+		</button>
+	</div>
+	}
+</div>

@@ -48,6 +48,33 @@
 			<li><span>Phone: </span>{{ event.contactPhone }}</li>
 		</ul>
 	</div>
+
+	<!-- Add comment -->
+	<div class="add-comment">
+		<p>Write Comment:</p>
+		<input class="add-comment__text-input" [(ngModel)]="addCommentText" />
+		<p>Rating:</p>
+		<input
+			type="number"
+			class="add-comment__rating-input"
+			[(ngModel)]="addCommentRating"
+			min="1"
+			max="5"
+		/>
+		<button type="button" class="safe" (click)="addComment()">Add</button>
+	</div>
+
+	<!-- Comments -->
+	<app-list-container containerTitle="Comments">
+		@for (comment of comments; track comment.commentID){
+		<app-comment
+			[comment]="comment"
+			[own]="comment.userResponse.uid === user!.uid"
+			(commentId)="deleteComment($event)"
+			(updatedComment)="updateComment($event)"
+		/>
+		}
+	</app-list-container>
 </div>
 
 <!-- Event actions -->

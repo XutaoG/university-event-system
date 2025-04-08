@@ -1,0 +1,79 @@
+@use "../../styles/variables.scss";
+
+:host {
+	display: flex;
+	flex-direction: column;
+	padding: 12px;
+	border-radius: 6px;
+	gap: 8px;
+	background-color: variables.$primary-gray;
+}
+
+.comment {
+	&__info {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: variables.$font-gray;
+
+		&__rating-input {
+			background-color: transparent;
+			width: 48px;
+			padding: 4px 0;
+			border: none;
+			border-bottom: 2px solid black;
+			font-size: 16px;
+		}
+	}
+
+	&__body {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		&__text-input {
+			flex-grow: 1;
+			background-color: transparent;
+			padding: 4px 0;
+			border: none;
+			border-bottom: 2px solid black;
+			font-size: 16px;
+		}
+
+		&__text-input {
+			flex-grow: 1;
+			padding: 4px 0;
+			border: none;
+			border-bottom: 2px solid black;
+			font-size: 16px;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		gap: 8px;
+
+		button {
+			background-color: variables.$primary-gray-dark-1;
+			aspect-ratio: 1;
+			padding: 4px;
+			border-radius: 100%;
+
+			&:hover {
+				background-color: variables.$primary-gray-dark-2;
+			}
+		}
+	}
+}
+
+mat-icon {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+}
+
+p {
+	> span {
+		font-weight: 500;
+	}
+}

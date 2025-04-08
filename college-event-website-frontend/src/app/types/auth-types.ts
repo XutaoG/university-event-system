@@ -13,7 +13,7 @@ export interface LoginForm {
 }
 
 export interface User {
-	id: number;
+	uid: number;
 	name: string;
 	email: string;
 	userRole: 'Student' | 'Admin' | 'SuperAdmin';
