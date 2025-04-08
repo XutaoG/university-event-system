@@ -18,9 +18,6 @@ export class RsoComponent implements OnInit {
 	availableRsos: Rso[] = [];
 
 	ngOnInit() {
-		this.rsoService.getJoinedRso().subscribe();
-		this.rsoService.getAvailableRso().subscribe();
-
 		this.rsoService.joinedRso$.subscribe((rsos) => {
 			this.joinedRsos = rsos;
 		});

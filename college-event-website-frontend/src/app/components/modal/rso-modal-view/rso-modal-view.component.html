@@ -35,11 +35,11 @@
 	@if (!rsoOwned) {
 	<!-- User joined RSO -->
 	@if (rsoJoined === true) {
-	<button type="button" class="danger" (click)="onClose()">Leave</button>
+	<button type="button" class="danger" (click)="leaveRso()">Leave</button>
 	}
 	<!-- User has joined RSO -->
 	@else {
-	<button type="button" class="safe" (click)="onClose()">Join</button>
+	<button type="button" class="safe" (click)="joinRso()">Join</button>
 	} }
 </div>
 }

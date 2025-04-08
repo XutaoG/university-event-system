@@ -82,4 +82,16 @@ export class RsoModalViewComponent implements OnInit {
 		this.modalService.setEvent(null);
 		this.modalService.setRso(null);
 	}
+
+	joinRso() {
+		this.rsoService.joinRso(this.rso!.rsoid).subscribe(() => {
+			this.onClose();
+		});
+	}
+
+	leaveRso() {
+		this.rsoService.leaveRso(this.rso!.rsoid).subscribe(() => {
+			this.onClose();
+		});
+	}
 }
