@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import urlJoin from 'url-join';
 import { environment } from '../../../environments/environment';
 import {
+	apiGetAvailableRsoRoute,
 	apiGetRsoByIdRoute,
 	apiGetRsoJoinedRoute,
 	apiGetRsoOwnedRoute,
@@ -20,7 +21,10 @@ export class RsoService {
 	joinedRso$ = this.joinedRsoSubject.asObservable();
 
 	private ownedRsoSubject = new BehaviorSubject<Rso[]>([]);
-	ownedRso$ = this.joinedRsoSubject.asObservable();
+	ownedRso$ = this.ownedRsoSubject.asObservable();
+
+	private availableRsoSubject = new BehaviorSubject<Rso[]>([]);
+	availableRso$ = this.availableRsoSubject.asObservable();
 
 	getRsoById(rsoId: number) {
 		const url = urlJoin(
@@ -48,6 +52,16 @@ export class RsoService {
 		return this.http.get<Rso[]>(url, { withCredentials: true }).pipe(
 			tap((rsos) => {
 				this.ownedRsoSubject.next(rsos);
+			})
+		);
+	}
+
+	getAvailableRso() {
+		const url = urlJoin(environment.apiUrl, apiGetAvailableRsoRoute);
+
+		return this.http.get<Rso[]>(url, { withCredentials: true }).pipe(
+			tap((rsos) => {
+				this.availableRsoSubject.next(rsos);
 			})
 		);
 	}

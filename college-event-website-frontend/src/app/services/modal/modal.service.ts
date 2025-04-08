@@ -14,10 +14,12 @@ export class ModalService {
 	rso$ = this.rsoSubject.asObservable();
 
 	setEvent(event: EventT | null) {
+		this.rsoSubject.next(null);
 		this.eventSubject.next(event);
 	}
 
 	setRso(rso: Rso | null) {
+		this.eventSubject.next(null);
 		this.rsoSubject.next(rso);
 	}
 }

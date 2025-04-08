@@ -63,7 +63,7 @@ button {
 	}
 
 	&.safe {
-		border: 2px soild variables.$safe;
+		border: 2px solid variables.$safe;
 
 		&:hover {
 			background-color: variables.$safe;

@@ -90,7 +90,7 @@ export class ModalComponent implements OnInit {
 						this.rsoEvents = rsoEvents;
 					});
 
-				// Get if user owns RSO
+				// Get if user joined RSO
 				for (let i = 0; i < this.joinedRsos.length; i++) {
 					if (this.joinedRsos[i].rsoid === rso.rsoid) {
 						this.rsoJoined = true;
@@ -98,7 +98,7 @@ export class ModalComponent implements OnInit {
 					}
 				}
 
-				// Get if user joined RSO
+				// Get if user owns RSO
 				for (let i = 0; i < this.ownedRsos.length; i++) {
 					if (this.ownedRsos[i].rsoid === rso.rsoid) {
 						this.rsoOwned = true;

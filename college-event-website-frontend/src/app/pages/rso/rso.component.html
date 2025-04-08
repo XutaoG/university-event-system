@@ -1,1 +1,11 @@
-<p>rso works!</p>
+<app-grid-container containerTitle="Enrolled RSOs">
+	@for (rso of joinedRsos; track rso.rsoid) {
+	<app-rso-container [rso]="rso" />
+	}
+</app-grid-container>
+
+<app-grid-container containerTitle="For You to Join!">
+	@for (rso of availableRsos; track rso.rsoid) {
+	<app-rso-container [rso]="rso" />
+	}
+</app-grid-container>
