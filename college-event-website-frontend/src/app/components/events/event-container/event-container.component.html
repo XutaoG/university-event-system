@@ -13,7 +13,11 @@
 	<p class="event__description">
 		<span>Description: </span> {{ event().description }}
 	</p>
-	<button class="event__view-details-button" type="button">
+	<button
+		class="event__view-details-button"
+		type="button"
+		(click)="onViewDetail()"
+	>
 		View Detail
 	</button>
 </app-card-container>

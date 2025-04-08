@@ -1,0 +1,68 @@
+@use "../../../styles/variables.scss";
+
+.event {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+
+	color: variables.$font-gray;
+
+	&__title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: black;
+	}
+
+	&__name {
+		font-weight: 500;
+
+		text-overflow: ellipsis;
+		text-wrap: nowrap;
+		overflow: hidden;
+	}
+
+	&__date {
+		background-color: white;
+		border-radius: 100px;
+		padding: 0 8px;
+		font-weight: 500;
+		border: 1px solid variables.$primary-gray-dark-1;
+	}
+
+	&__line-break {
+		background-color: variables.$primary-gray-dark-1;
+	}
+
+	&__description__detail {
+		display: flex;
+		gap: 8px;
+	}
+
+	&__description {
+		flex-grow: 1;
+		align-self: start;
+		min-height: 48px;
+		max-height: 48px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		> span {
+			font-weight: 500;
+		}
+	}
+
+	&__view-details-button {
+		align-self: flex-end;
+		background-color: white;
+		border-radius: 6px;
+		padding: 4px 8px;
+		border: 2px solid black;
+
+		&:hover {
+			background-color: black;
+			color: white;
+		}
+	}
+}

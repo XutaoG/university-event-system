@@ -1,0 +1,117 @@
+@if (event != null || rso != null) {
+<div class="modal-container">
+	<div class="content-container">
+		<!-- Event content -->
+		@if (event != null) {
+		<div class="content event">
+			<!-- Title -->
+			<div class="event__title">
+				<p class="event__name">{{ event.name }}</p>
+				<p class="event__category">{{ event.eventCategory }}</p>
+			</div>
+			<div class="line-break"></div>
+			<!-- RSO -->
+			@if (rsoName != null) {
+			<p class="event__rso-name"><span>RSO: </span> {{ rsoName }}</p>
+			}
+			<!-- Description -->
+			<p class="event__description">
+				<span>Description: </span> {{ event.description }}
+			</p>
+			<!-- Date -->
+			<p class="event__date"><span>Date: </span>{{ eventDateParsed }}</p>
+			<!-- Time -->
+			<p class="event__time">
+				<span>Time: </span>{{ eventTimeParsed }} -
+				{{ eventTimeEndParsed }}
+			</p>
+			<!-- Location -->
+			<div class="event__location">
+				<!-- Location name -->
+				<p class="event__location__name">
+					<span>Location: </span>{{ event.location.name }}
+				</p>
+				<!-- Location coordiante -->
+				<ul>
+					<li><span>Address: </span>{{ event.location.address }}</li>
+					<li>
+						<span>Coordinate: </span>({{
+							event.location.latitude +
+								", " +
+								event.location.longitude
+						}})
+					</li>
+				</ul>
+			</div>
+			<!-- Contact -->
+			<div class="event__contact">
+				<p class="event__contact__title">Contact Information:</p>
+				<ul>
+					<!-- Contact email -->
+					<li><span>Email: </span>{{ event.contactEmail }}</li>
+					<!-- Contact phone -->
+					<li><span>Phone: </span>{{ event.contactPhone }}</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Event actions -->
+		<div class="action">
+			<button type="button" class="danger" (click)="onClose()">
+				Close
+			</button>
+		</div>
+		}
+
+		<!-- Rso content -->
+		@if (rso != null) {
+		<div class="content rso">
+			<!-- RSO name -->
+			<div class="rso__title">
+				<p class="rso__name">{{ rso.name }}</p>
+				<p class="rso__active" [ngClass]="{ active: rso.active }">
+					{{ rso.active ? "Active" : "Inactive" }}
+				</p>
+			</div>
+			<div class="line-break"></div>
+
+			<!-- RSO Description -->
+			<p class="rso__description">
+				<span>Description: </span>{{ rso.description }}
+			</p>
+
+			<div class="line-break"></div>
+
+			<!-- RSO Events -->
+			<app-list-container containerTitle="Events">
+				@for (rsoEvent of rsoEvents; track rsoEvent.eventID) {
+				<app-event-entry-container [event]="rsoEvent" />
+				}
+			</app-list-container>
+		</div>
+
+		<!-- RSO Actions -->
+		<div class="action">
+			<button type="button" class="danger" (click)="onClose()">
+				Close
+			</button>
+
+			<!-- User owns RSO -->
+			@if (!rsoOwned) {
+			<!-- User joined RSO -->
+			@if (rsoJoined) {
+			<button type="button" class="danger" (click)="onClose()">
+				Leave
+			</button>
+			}
+			<!-- User has joined RSO -->
+			@else {
+			<button type="button" class="safe" (click)="onClose()">
+				Leave
+			</button>
+			} }
+		</div>
+		}
+	</div>
+</div>
+}

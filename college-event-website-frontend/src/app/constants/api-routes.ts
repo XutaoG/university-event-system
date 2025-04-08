@@ -8,9 +8,16 @@ export const apiLogoutRoute = '/auth/logout';
 export const apiGetUniversityRoute = '/university';
 
 // RSO
-export const apiGetRsoJoined = '/rso/joined';
+export const apiGetRsoByIdRoute = '/rso/';
+export const apiGetRsoJoinedRoute = '/rso/joined';
+export const apiGetRsoOwnedRoute = '/rso/owned';
 
 // RSO Events
 export const apiGetRsoEventsAllRoute = '/event/rso';
+export const apiGetRsoEventsByRsoIdRoute = '/event/rso/byRso';
+
+// Public Events
 export const apiGetPublicEventsRoute = '/event/public';
+
+// Private Events
 export const apiGetPrivateEventsRoute = '/event/private';

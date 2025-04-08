@@ -1,0 +1,183 @@
+@use "../../styles/variables.scss";
+
+.modal-container {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+
+	display: flex;
+	justify-content: center;
+	padding: 32px;
+}
+
+.content-container {
+	background-color: white;
+	width: 1000px;
+	padding: 20px;
+	border-radius: 16px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	> .content {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		min-height: 0;
+	}
+
+	> .action {
+		display: flex;
+		justify-content: end;
+		gap: 16px;
+	}
+}
+
+button {
+	padding: 4px 20px;
+	border-radius: 4px;
+	background-color: white;
+	color: black;
+
+	&.danger {
+		border: 2px solid variables.$danger;
+
+		&:hover {
+			background-color: variables.$danger;
+			color: white;
+		}
+	}
+
+	&.primary {
+		border: 2px solid black;
+
+		&:hover {
+			background-color: black;
+			color: white;
+		}
+	}
+
+	&.safe {
+		border: 2px soild variables.$safe;
+
+		&:hover {
+			background-color: variables.$safe;
+			color: white;
+		}
+	}
+}
+
+.line-break {
+	background-color: variables.$primary-gray;
+}
+
+.event {
+	> p {
+		> span {
+			font-weight: 500;
+		}
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	&__name {
+		font-size: 20px;
+		font-weight: 500;
+	}
+
+	&__category {
+		background-color: variables.$primary-gray-dark-2;
+		color: white;
+		border-radius: 4px;
+		padding: 2px 8px;
+	}
+
+	&__location {
+		&__name {
+			margin-bottom: 8px;
+
+			> span {
+				font-weight: 500;
+			}
+		}
+
+		> ul {
+			li {
+				margin-left: 20px;
+				margin-bottom: 4px;
+
+				span {
+					font-weight: 500;
+				}
+			}
+		}
+	}
+
+	&__contact {
+		background-color: variables.$primary-gray;
+		padding: 12px;
+		border-radius: 8px;
+
+		&__title {
+			font-size: 18px;
+			margin-bottom: 12px;
+		}
+
+		> ul {
+			> li {
+				margin-left: 20px;
+				margin-bottom: 4px;
+
+				span {
+					font-weight: 500;
+				}
+			}
+		}
+	}
+}
+
+.rso {
+	> p {
+		> span {
+			font-weight: 500;
+		}
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	&__name {
+		font-size: 20px;
+		font-weight: 500;
+	}
+
+	&__active {
+		border-radius: 4px;
+		padding: 2px 8px;
+		background-color: variables.$danger;
+		color: white;
+
+		&.active {
+			background-color: variables.$safe;
+		}
+	}
+
+	&__events {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		overflow-y: scroll;
+	}
+}

@@ -6,9 +6,9 @@ import { roleMap } from '../../types/auth-types';
 import { MatIconModule } from '@angular/material/icon';
 import { RsoService } from '../../services/rso/rso.service';
 import { RsoJoinedComponent } from '../../components/rso/rso-joined/rso-joined.component';
-import { RsoEventsComponent } from '../../components/events/rso-events/rso-events.component';
 import { UniversityInfoComponent } from '../../components/university-info/university-info.component';
 import { UpcomingRsoEventsComponent } from '../../components/events/upcoming-rso-events/upcoming-rso-events.component';
+import { ModalComponent } from '../../components/modal/modal.component';
 
 @Component({
 	selector: 'app-home',

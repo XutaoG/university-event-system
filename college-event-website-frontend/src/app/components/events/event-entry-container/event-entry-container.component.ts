@@ -1,16 +1,16 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CardContainerComponent } from '../../card-container/card-container.component';
-import { EventT } from '../../../types/event-types';
 import { ModalService } from '../../../services/modal/modal.service';
+import { EventT } from '../../../types/event-types';
 import { parseDate, parseTime } from '../../../utils';
 
 @Component({
-	selector: 'app-event-container',
+	selector: 'app-event-entry-container',
 	imports: [CardContainerComponent],
-	templateUrl: './event-container.component.html',
-	styleUrl: './event-container.component.scss',
+	templateUrl: './event-entry-container.component.html',
+	styleUrl: './event-entry-container.component.scss',
 })
-export class EventContainerComponent implements OnInit {
+export class EventEntryContainerComponent {
 	private modalService = inject(ModalService);
 
 	event = input.required<EventT>();

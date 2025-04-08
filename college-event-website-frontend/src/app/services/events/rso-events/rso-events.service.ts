@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { apiGetRsoEventsAllRoute } from '../../../constants/api-routes';
+import {
+	apiGetRsoEventsAllRoute,
+	apiGetRsoEventsByRsoIdRoute,
+} from '../../../constants/api-routes';
 import urlJoin from 'url-join';
 import { RsoEvent } from '../../../types/event-types';
 
@@ -13,6 +16,16 @@ export class RsoEventsService {
 
 	getAllRsoEvents() {
 		const url = urlJoin(environment.apiUrl, apiGetRsoEventsAllRoute);
+
+		return this.http.get<RsoEvent[]>(url, { withCredentials: true });
+	}
+
+	getAllRsoEventsByRsoId(rsoId: number) {
+		const url = urlJoin(
+			environment.apiUrl,
+			apiGetRsoEventsByRsoIdRoute,
+			rsoId.toString()
+		);
 
 		return this.http.get<RsoEvent[]>(url, { withCredentials: true });
 	}

@@ -4,6 +4,7 @@
 	flex-direction: column;
 	gap: 20px;
 	position: relative;
+	min-height: 0;
 }
 
 .container-title {
@@ -11,9 +12,8 @@
 }
 
 .content-container {
-	justify-items: center;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: auto;
-	gap: 32px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	overflow-y: auto;
 }

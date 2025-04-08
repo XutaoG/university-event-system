@@ -4,5 +4,11 @@
 	<p class="rso__description">
 		{{ rso().description }}
 	</p>
-	<button class="rso__view-details-button" type="button">View Detail</button>
+	<button
+		class="rso__view-details-button"
+		type="button"
+		(click)="onViewDetail()"
+	>
+		View Detail
+	</button>
 </app-card-container>

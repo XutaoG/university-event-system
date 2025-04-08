@@ -9,3 +9,19 @@ export const sortEventByDate = <T extends EventT>(events: T[]): T[] => {
 
 	return events;
 };
+
+export const parseDate = (date: Date) => {
+	const eventDate = new Date(date);
+	return `${eventDate.getMonth() + 1}/${eventDate.getDate()}/${eventDate
+		.getFullYear()
+		.toString()
+		.substring(2)}`;
+};
+
+export const parseTime = (time: string) => {
+	return new Date('1970-01-01T' + time + 'Z').toLocaleString('en-US', {
+		hour: 'numeric',
+		minute: 'numeric',
+		hour12: true,
+	});
+};

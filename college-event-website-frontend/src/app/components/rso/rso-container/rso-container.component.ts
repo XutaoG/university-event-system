@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Rso } from '../../../types/rso-types';
 import { CardContainerComponent } from '../../card-container/card-container.component';
+import { ModalService } from '../../../services/modal/modal.service';
 
 @Component({
 	selector: 'app-rso-container',
@@ -9,5 +10,10 @@ import { CardContainerComponent } from '../../card-container/card-container.comp
 	styleUrl: './rso-container.component.scss',
 })
 export class RsoContainerComponent {
+	private modalService = inject(ModalService);
 	rso = input.required<Rso>();
+
+	onViewDetail() {
+		this.modalService.setRso(this.rso());
+	}
 }
