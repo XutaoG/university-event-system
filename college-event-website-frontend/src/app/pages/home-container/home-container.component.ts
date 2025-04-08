@@ -4,6 +4,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { NavComponent } from '../../components/nav/nav.component';
 import { ModalComponent } from '../../components/modal/modal.component';
+import { RsoService } from '../../services/rso/rso.service';
 
 @Component({
 	selector: 'app-home-container',
@@ -12,8 +13,10 @@ import { ModalComponent } from '../../components/modal/modal.component';
 	styleUrl: './home-container.component.scss',
 })
 export class HomeContainerComponent implements OnInit {
-	authService = inject(AuthService);
-	router = inject(Router);
+	private authService = inject(AuthService);
+	private router = inject(Router);
+
+	private rsoService = inject(RsoService);
 
 	logout() {
 		this.authService.logout().subscribe(() => {
@@ -23,5 +26,7 @@ export class HomeContainerComponent implements OnInit {
 
 	ngOnInit() {
 		this.authService.getUser().subscribe();
+
+		this.rsoService.rsoFresh();
 	}
 }

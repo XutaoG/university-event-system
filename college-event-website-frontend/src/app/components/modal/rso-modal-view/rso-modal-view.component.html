@@ -1,0 +1,45 @@
+<!-- Rso content -->
+@if (rso != null) {
+<div class="content rso">
+	<!-- RSO name -->
+	<div class="rso__title">
+		<p class="rso__name">{{ rso.name }}</p>
+		<p class="rso__active" [ngClass]="{ active: rso.active }">
+			{{ rso.active ? "Active" : "Inactive" }}
+		</p>
+	</div>
+	<div class="line-break"></div>
+
+	<!-- RSO Description -->
+	<p class="rso__description">
+		<span>Description: </span>{{ rso.description }}
+	</p>
+
+	<div class="line-break"></div>
+
+	<!-- RSO Events -->
+	<app-list-container containerTitle="Events">
+		@for (rsoEvent of rsoEvents; track rsoEvent.eventID) {
+		<app-event-entry-container [event]="rsoEvent" />
+		} @if (rsoEvents.length === 0) {
+		<p>No Events have been created</p>
+		}
+	</app-list-container>
+</div>
+
+<!-- RSO Actions -->
+<div class="action">
+	<button type="button" class="danger" (click)="onClose()">Close</button>
+
+	<!-- User owns RSO -->
+	@if (!rsoOwned) {
+	<!-- User joined RSO -->
+	@if (rsoJoined === true) {
+	<button type="button" class="danger" (click)="onClose()">Leave</button>
+	}
+	<!-- User has joined RSO -->
+	@else {
+	<button type="button" class="safe" (click)="onClose()">Join</button>
+	} }
+</div>
+}

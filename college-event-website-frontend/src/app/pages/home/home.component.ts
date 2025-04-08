@@ -28,8 +28,6 @@ export class HomeComponent implements OnInit {
 	private authService = inject(AuthService);
 	user$ = this.authService.user$;
 
-	// userRole: string = '';
-
 	private uniService = inject(UniversityService);
 	university$ = this.uniService.university$;
 
@@ -37,15 +35,5 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit() {
 		this.uniService.getUniversity().subscribe();
-
-		this.rsoService.getJoinedRso().subscribe();
-		this.rsoService.getAvailableRso().subscribe();
-		this.rsoService.getOwnedRso().subscribe();
-
-		// // Get user role key
-		// this.user$.subscribe((user) => {
-		// 	const key = user!.userRole as keyof typeof roleMap;
-		// 	this.userRole = roleMap[key];
-		// });
 	}
 }
