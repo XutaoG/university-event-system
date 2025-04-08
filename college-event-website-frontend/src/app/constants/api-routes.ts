@@ -10,7 +10,7 @@ export const apiGetUniversityRoute = '/university';
 // RSO
 export const apiGetRsoByIdRoute = '/rso/';
 export const apiGetRsoJoinedRoute = '/rso/joined';
-export const apiGetRsoOwnedRoute = '/rso/owned';
+export const apiGetRsoOwnedRoute = '/rso/own';
 export const apiGetAvailableRsoRoute = '/rso/join';
 
 // RSO Events
