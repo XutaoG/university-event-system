@@ -12,6 +12,8 @@ export const apiGetRsoByIdRoute = '/rso/';
 export const apiGetRsoJoinedRoute = '/rso/joined';
 export const apiGetRsoOwnedRoute = '/rso/own';
 export const apiGetAvailableRsoRoute = '/rso/join';
+export const apiJoinRsoRoute = '/rso/join';
+export const apiLeaveRsoRoute = '/rso/leave';
 
 // RSO Events
 export const apiGetRsoEventsAllRoute = '/event/rso';

@@ -7,6 +7,8 @@ import {
 	apiGetRsoByIdRoute,
 	apiGetRsoJoinedRoute,
 	apiGetRsoOwnedRoute,
+	apiJoinRsoRoute,
+	apiLeaveRsoRoute,
 } from '../../constants/api-routes';
 import { Rso } from '../../types/rso-types';
 import { BehaviorSubject, tap } from 'rxjs';
@@ -64,5 +66,35 @@ export class RsoService {
 				this.availableRsoSubject.next(rsos);
 			})
 		);
+	}
+
+	joinRso(rsoId: number) {
+		const url = urlJoin(
+			environment.apiUrl,
+			apiJoinRsoRoute,
+			rsoId.toString()
+		);
+
+		return this.http
+			.post<void>(url, null, { withCredentials: true })
+			.pipe(tap(() => this.rsoFresh()));
+	}
+
+	leaveRso(rsoId: number) {
+		const url = urlJoin(
+			environment.apiUrl,
+			apiLeaveRsoRoute,
+			rsoId.toString()
+		);
+
+		return this.http
+			.post<void>(url, null, { withCredentials: true })
+			.pipe(tap(() => this.rsoFresh()));
+	}
+
+	rsoFresh() {
+		this.getAvailableRso().subscribe();
+		this.getJoinedRso().subscribe();
+		this.getOwnedRso().subscribe();
 	}
 }
