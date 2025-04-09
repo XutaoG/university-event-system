@@ -64,8 +64,4 @@ export class AuthService {
 			})
 		);
 	}
-
-	private setUser(user: User | null) {
-		this.userSubject.next(user);
-	}
 }

@@ -6,33 +6,38 @@
 	</p>
 </div>
 
-<form class="auth-form">
+<form class="auth-form" [formGroup]="signUpForm" (ngSubmit)="submit()">
 	<div class="auth-form__input-container">
 		<!-- Username -->
 		<div class="input">
 			<label for="username">Username</label>
-			<input id="username" type="text" placeholder="Username" />
+			<input
+				id="username"
+				type="text"
+				placeholder="Username"
+				formControlName="name"
+			/>
 		</div>
 
 		<!-- Email -->
 		<div class="input">
 			<label for="email">Email</label>
-			<input id="email" type="email" placeholder="Email" />
+			<input
+				id="email"
+				type="email"
+				placeholder="Email"
+				formControlName="email"
+			/>
 		</div>
 
 		<!-- Password -->
 		<div class="input">
 			<label for="password">Password</label>
-			<input id="password" type="password" placeholder="Password" />
-		</div>
-
-		<!-- Confirm Password -->
-		<div class="input">
-			<label for="confirm-password">Confirm Password</label>
 			<input
-				id="confirm-password"
+				id="password"
 				type="password"
-				placeholder="Confirm Password"
+				placeholder="Password"
+				formControlName="password"
 			/>
 		</div>
 
@@ -44,13 +49,17 @@
 				class="role-select"
 				type="text"
 				placeholder="Role"
+				formControlName="userRole"
 			>
-				<option value="student">Student</option>
-				<option value="admin">Admin</option>
-				<option value="superAdmin">Super Admin</option>
+				<option value="Student">Student</option>
+				<option value="Admin">Admin</option>
+				<option value="SuperAdmin">Super Admin</option>
 			</select>
 		</div>
 	</div>
 
-	<button class="auth-form__submit-button">Sign Up</button>
+	<button class="auth-form__submit-button" type="submit">
+		@if (isFetching) { <mat-icon class="spin">replay icon</mat-icon> } @else
+		{Sign Up}
+	</button>
 </form>

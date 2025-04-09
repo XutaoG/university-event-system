@@ -8,6 +8,7 @@ import {
 } from '../../../constants/api-routes';
 import urlJoin from 'url-join';
 import { AddEventForm, RsoEvent } from '../../../types/event-types';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -15,10 +16,17 @@ import { AddEventForm, RsoEvent } from '../../../types/event-types';
 export class RsoEventsService {
 	private http = inject(HttpClient);
 
+	private allRsoEvents = new BehaviorSubject<RsoEvent[] | null>(null);
+	allRsoEvents$ = this.allRsoEvents.asObservable();
+
 	getAllRsoEvents() {
 		const url = urlJoin(environment.apiUrl, apiGetRsoEventsAllRoute);
 
-		return this.http.get<RsoEvent[]>(url, { withCredentials: true });
+		return this.http.get<RsoEvent[]>(url, { withCredentials: true }).pipe(
+			tap((rsos) => {
+				this.allRsoEvents.next(rsos);
+			})
+		);
 	}
 
 	getAllRsoEventsByRsoId(rsoId: number) {

@@ -8,7 +8,11 @@
 <app-university-info />
 
 <!-- Joined RSOs -->
+@if ((joinedRsos$ | async); as joinedRsos) { @if (joinedRsos.length > 0){
 <app-rso-joined />
+} }
 
 <!-- RSO Events -->
+@if ((rsoEvents$ | async); as rsoEvents) { @if (rsoEvents.length > 0){
 <app-upcoming-rso-events />
+} }

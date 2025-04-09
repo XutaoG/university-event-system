@@ -26,8 +26,6 @@ export class LoginComponent {
 
 	isFetching = signal(false);
 
-	constructor() {}
-
 	loginForm = this.formBuilder.group({
 		email: new FormControl<string>('', {
 			nonNullable: true,

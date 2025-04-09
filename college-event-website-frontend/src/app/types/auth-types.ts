@@ -1,5 +1,3 @@
-import { FormControl } from '@angular/forms';
-
 export interface SignUpForm {
 	name: string;
 	email: string;
