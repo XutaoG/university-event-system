@@ -34,3 +34,22 @@ export interface PrivateEvent extends EventT {
 export interface RsoEvent extends EventT {
 	rsoid: number;
 }
+
+export interface AddEventForm {
+	name: string;
+	eventCategory: string;
+	description: string | null;
+	eventTime: string;
+	eventTimeEnd: string;
+	eventDate: Date;
+	contactPhone: string;
+	contactEmail: string;
+	location: AddLocationForm;
+}
+
+export interface AddLocationForm {
+	name: string;
+	latitude: number;
+	longitude: number;
+	address: string;
+}

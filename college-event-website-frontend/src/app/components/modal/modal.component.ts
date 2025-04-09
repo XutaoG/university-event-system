@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { EventModalViewComponent } from './event-modal-view/event-modal-view.component';
 import { RsoModalViewComponent } from './rso-modal-view/rso-modal-view.component';
 import { AddRsoModalViewComponent } from './add-rso-modal-view/add-rso-modal-view.component';
+import { AddEventModalViewComponent } from './add-event-modal-view/add-event-modal-view.component';
 
 @Component({
 	selector: 'app-modal',
@@ -14,6 +15,7 @@ import { AddRsoModalViewComponent } from './add-rso-modal-view/add-rso-modal-vie
 		EventModalViewComponent,
 		RsoModalViewComponent,
 		AddRsoModalViewComponent,
+		AddEventModalViewComponent,
 	],
 	templateUrl: './modal.component.html',
 	styleUrl: './modal.component.scss',

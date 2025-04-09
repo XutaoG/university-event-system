@@ -1,0 +1,157 @@
+<form [formGroup]="addEventForm">
+	<div class="content add-event">
+		<p class="add-event__title">Create New Event</p>
+
+		<div class="line-break"></div>
+
+		<!-- Event name -->
+		<div class="add-event__input-field">
+			<label for="event-name">Name: </label>
+			<input
+				id="event-name"
+				type="text"
+				placeholder="Event Name"
+				formControlName="name"
+			/>
+		</div>
+
+		<!-- Event category -->
+		<div class="add-event__input-field">
+			<label for="event-category">Category: </label>
+			<input
+				id="event-category"
+				type="text"
+				placeholder="Social, Tech..."
+				formControlName="category"
+			/>
+		</div>
+
+		<!-- Event description -->
+		<div class="add-event__input-field">
+			<label for="event-name">Description: </label>
+			<textarea
+				id="event-description"
+				type="text"
+				placeholder="Talk about what your event is about"
+				formControlName="description"
+			></textarea>
+		</div>
+
+		<div class="add-event__time-select">
+			<!-- Event date -->
+			<div class="add-event__input-field">
+				<label for="event-date">Date: </label>
+				<input
+					id="event-date"
+					type="date"
+					placeholder="Talk about what your event is about"
+					formControlName="date"
+				/>
+			</div>
+
+			<!-- Event start time -->
+			<div class="add-event__input-field">
+				<label for="event-start-time">Start Time: </label>
+				<input
+					id="event-start-time"
+					type="time"
+					formControlName="startTime"
+				/>
+			</div>
+
+			<!-- Event end time -->
+			<div class="add-event__input-field">
+				<label for="event-end-time">End Time: </label>
+				<input
+					id="event-end-time"
+					type="time"
+					formControlName="endTime"
+				/>
+			</div>
+		</div>
+
+		<div class="add-event__contact-input">
+			<!-- Event contact phone -->
+			<div class="add-event__input-field">
+				<label for="event-email">Contact Phone Number: </label>
+				<input
+					id="event-email"
+					type="email"
+					placeholder="(123)456-7890"
+					formControlName="contactPhone"
+				/>
+			</div>
+
+			<!-- Event ontact email -->
+			<div class="add-event__input-field">
+				<label for="event-phone">Contact Phone Number: </label>
+				<input
+					id="event-phone"
+					type="tel"
+					placeholder="example@email.com"
+					formControlName="contactEmail"
+				/>
+			</div>
+		</div>
+
+		<!-- Event location name -->
+		<div class="add-event__input-field">
+			<label for="event-location-name">Location Name: </label>
+			<input
+				id="event-location-name"
+				type="text"
+				placeholder="Memory Mall"
+				formControlName="locationName"
+			/>
+		</div>
+
+		<div class="add-event__coordinates">
+			<!-- Event location latitude -->
+			<div class="add-event__input-field">
+				<label for="event-latitude">Latitude: </label>
+				<input
+					id="event-latitude"
+					type="text"
+					placeholder="0.0"
+					disabled
+					[value]="latitude"
+				/>
+			</div>
+
+			<!-- Event location longitude -->
+			<div class="add-event__input-field">
+				<label for="event-longitude">Longitude: </label>
+				<input
+					id="event-longitude"
+					type="text"
+					placeholder="0.0"
+					disabled
+					[value]="longitude"
+				/>
+			</div>
+		</div>
+
+		<!-- Event Location address -->
+		<div class="add-event__input-field">
+			<label for="event-address">Address: </label>
+			<input
+				id="event-address"
+				type="text"
+				placeholder="4000 Central Florida Blvd. Orlando, FL 32816"
+				disabled
+				[value]="address"
+			/>
+		</div>
+
+		<div class="map" id="map"></div>
+	</div>
+
+	<div class="action">
+		<button type="button" class="danger" (click)="onCancel()">
+			Cancel
+		</button>
+		<button type="button" class="safe" (click)="onAddEvent()">
+			Create Event
+		</button>
+	</div>
+</form>

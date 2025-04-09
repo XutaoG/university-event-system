@@ -19,6 +19,8 @@ export class ModalService {
 	isAddingEvent$ = this.isAddingEventSubject.asObservable();
 	isAddingRso$ = this.isAddingRsoSubject.asObservable();
 
+	currentRsoId: number | null = null;
+
 	setEvent(event: EventT | null) {
 		this.rsoSubject.next(null);
 		this.eventSubject.next(event);

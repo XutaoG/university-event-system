@@ -11,12 +11,15 @@
 		<app-rso-modal-view />
 		}
 
-		<!-- Add Event view -->
+		<!-- Add RSO view -->
 		@if (isAddingRso) {
 		<app-add-rso-modal-view />
 		}
 
-		<!-- Add RSO view -->
+		<!-- Add Event view -->
+		@if (isAddingEvent) {
+		<app-add-event-modal-view />
+		}
 	</div>
 </div>
 }

@@ -94,4 +94,9 @@ export class RsoModalViewComponent implements OnInit {
 			this.onClose();
 		});
 	}
+
+	onModalOpen() {
+		this.modalService.currentRsoId = this.rso!.rsoid;
+		this.modalService.setAddingEvent(true);
+	}
 }

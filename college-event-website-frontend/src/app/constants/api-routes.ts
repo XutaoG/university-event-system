@@ -19,12 +19,15 @@ export const apiAddRsoRoute = '/rso';
 // RSO Events
 export const apiGetRsoEventsAllRoute = '/event/rso';
 export const apiGetRsoEventsByRsoIdRoute = '/event/rso/byRso';
+export const apiAddRsoEventRoute = '/event/rso';
 
 // Public Events
 export const apiGetPublicEventsRoute = '/event/public';
+export const apiAddPublicEventRoute = '/event/public';
 
 // Private Events
 export const apiGetPrivateEventsRoute = '/event/private';
+export const apiAddPrivateEventRoute = '/event/private';
 
 // Comment
 export const apiAddCommentRoute = '/comment';
