@@ -48,27 +48,17 @@ public class SQLRSORepository(
 
 			foreach (var email in memberEmails)
 			{
-				emailVerifyTasks.Add(connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE Email = @Email", new { Email = email }));
-			}
-
-			foreach (var res in await Task.WhenAll(emailVerifyTasks))
-			{
-				if (res == null)
+				var userRes = await connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE Email = @Email", new { Email = email });
+				if (userRes == null)
 				{
 					return null;
 				}
 			}
 
 			// Add members
-			var memberInsertTasks = new List<Task<int>>();
-
 			foreach (var email in memberEmails)
 			{
-				memberInsertTasks.Add(connection.ExecuteAsync("INSERT INTO rso_members (RSOID, UID) VALUES (@RSOID, (SELECT UID FROM users WHERE EMAIL = @EMAIL))", new { RSOID = insertedId, EMAIL = email }));
-			}
-
-			foreach (var res in await Task.WhenAll(memberInsertTasks))
-			{
+				var res = await connection.ExecuteAsync("INSERT INTO rso_members (RSOID, UID) VALUES (@RSOID, (SELECT UID FROM users WHERE EMAIL = @EMAIL))", new { RSOID = insertedId, EMAIL = email });
 				if (res == 0)
 				{
 					return null;
@@ -79,8 +69,9 @@ public class SQLRSORepository(
 
 			return rso;
 		}
-		catch (Exception)
+		catch (Exception e)
 		{
+			Console.WriteLine(e.Message);
 			return null;
 		}
 	}
