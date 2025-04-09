@@ -1,11 +1,31 @@
+@if ((user$ | async); as user) { @if (user!.userRole === "Student" ||
+user!.userRole === "Admin") {
+<app-add-rso />
+} }
+
+<!-- Owned RSOs -->
+@if (ownedRsos.length > 0) {
+<app-grid-container containerTitle="Your RSOs">
+	@for (rso of ownedRsos; track rso.rsoid) {
+	<app-rso-container [rso]="rso" />
+	}
+</app-grid-container>
+}
+
+<!-- Joined RSOs -->
+@if (joinedRsos.length > 0) {
 <app-grid-container containerTitle="Enrolled RSOs">
 	@for (rso of joinedRsos; track rso.rsoid) {
 	<app-rso-container [rso]="rso" />
 	}
 </app-grid-container>
+}
 
+<!-- Available RSOs -->
+@if (availableRsos.length > 0) {
 <app-grid-container containerTitle="For You to Join!">
 	@for (rso of availableRsos; track rso.rsoid) {
 	<app-rso-container [rso]="rso" />
 	}
 </app-grid-container>
+}

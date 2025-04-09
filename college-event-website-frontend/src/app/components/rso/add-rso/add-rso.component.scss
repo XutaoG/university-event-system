@@ -1,0 +1,24 @@
+@use "../../../styles/variables.scss";
+
+:host {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+}
+
+p {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+button {
+	padding: 4px 8px;
+	border: 2px solid variables.$safe;
+	border-radius: 8px;
+
+	&:hover {
+		background-color: variables.$safe;
+		color: white;
+	}
+}

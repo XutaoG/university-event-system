@@ -1,11 +1,22 @@
-@if (event != null || rso != null) {
+@if (event != null || rso != null || isAddingRso || isAddingEvent) {
 <div class="modal-container">
 	<div class="content-container">
+		<!-- Event view -->
 		@if (event != null) {
 		<app-event-modal-view />
-		} @if (rso != null){
+		}
+
+		<!-- Modal view -->
+		@if (rso != null){
 		<app-rso-modal-view />
 		}
+
+		<!-- Add Event view -->
+		@if (isAddingRso) {
+		<app-add-rso-modal-view />
+		}
+
+		<!-- Add RSO view -->
 	</div>
 </div>
 }

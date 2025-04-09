@@ -6,3 +6,9 @@ export interface Rso {
 	adminID: number;
 	active: boolean;
 }
+
+export interface AddRsoForm {
+	name: string;
+	description: string;
+	memberEmails: string[];
+}

@@ -1,0 +1,52 @@
+@use "../../../styles/variables.scss";
+
+:host {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+
+form {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	min-height: 0;
+}
+
+.add-rso {
+	&__title {
+		font-size: 18px;
+		font-weight: 500;
+	}
+
+	&__input-field {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		min-height: 0;
+
+		input {
+			border: 1px solid variables.$primary-gray-dark-1;
+			padding: 8px 12px;
+			border-radius: 8px;
+		}
+
+		textarea {
+			border: 1px solid variables.$primary-gray-dark-1;
+			padding: 8px 12px;
+			border-radius: 8px;
+			min-height: 128px;
+			max-height: 256px;
+			min-width: 100%;
+			max-width: 100%;
+		}
+	}
+
+	&__member-field {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+}

@@ -1,0 +1,46 @@
+<form [formGroup]="addRsoForm">
+	<div class="content add-rso">
+		<p class="add-rso__title">Create New RSO</p>
+
+		<div class="line-break"></div>
+
+		<div class="add-rso__input-field">
+			<label for="rso-name">Name: </label>
+			<input
+				id="rso-name"
+				type="text"
+				placeholder="RSO Name"
+				formControlName="name"
+			/>
+		</div>
+
+		<div class="add-rso__input-field">
+			<label for="rso-description">Description:</label>
+			<textarea
+				id="rso-description"
+				placeholder="Tell me what your organization is about"
+				formControlName="description"
+			></textarea>
+		</div>
+
+		<div class="add-rso__input-field">
+			<label for="rso-members"
+				>Add Members (Enter member emails separated by ",")</label
+			>
+			<textarea
+				id="rso-members"
+				placeholder="Enter member emails"
+				formControlName="memberEmails"
+			></textarea>
+		</div>
+	</div>
+
+	<div class="action">
+		<button type="button" class="danger" (click)="onCancel()">
+			Cancel
+		</button>
+		<button type="button" class="safe" (click)="onAddRso()">
+			Create RSO
+		</button>
+	</div>
+</form>

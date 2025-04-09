@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import urlJoin from 'url-join';
 import { environment } from '../../../environments/environment';
 import {
+	apiAddRsoRoute,
 	apiGetAvailableRsoRoute,
 	apiGetRsoByIdRoute,
 	apiGetRsoJoinedRoute,
@@ -10,7 +11,7 @@ import {
 	apiJoinRsoRoute,
 	apiLeaveRsoRoute,
 } from '../../constants/api-routes';
-import { Rso } from '../../types/rso-types';
+import { AddRsoForm, Rso } from '../../types/rso-types';
 import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
@@ -89,6 +90,14 @@ export class RsoService {
 
 		return this.http
 			.post<void>(url, null, { withCredentials: true })
+			.pipe(tap(() => this.rsoFresh()));
+	}
+
+	addRso(rso: AddRsoForm) {
+		const url = urlJoin(environment.apiUrl, apiAddRsoRoute);
+
+		return this.http
+			.post<Rso>(url, rso, { withCredentials: true })
 			.pipe(tap(() => this.rsoFresh()));
 	}
 

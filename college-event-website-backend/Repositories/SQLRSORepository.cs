@@ -69,9 +69,8 @@ public class SQLRSORepository(
 
 			return rso;
 		}
-		catch (Exception e)
+		catch (Exception)
 		{
-			Console.WriteLine(e.Message);
 			return null;
 		}
 	}
