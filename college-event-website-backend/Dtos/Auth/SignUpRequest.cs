@@ -28,7 +28,7 @@ public class SignUpRequest
 	public string Email { get; set; } = null!;
 
 	[Required]
-	[MinLength(8)]
+	[MinLength(3)]
 	[MaxLength(32)]
 	[Password]
 	public string Password { get; set; } = null!;

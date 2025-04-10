@@ -14,38 +14,29 @@ public class SQLRSORepository(
 	public async Task<RSO?> Create(int adminId, RSO rso, List<string> memberEmails)
 	{
 		using var connection = GetConnection();
-
 		try
 		{
 			await connection.OpenAsync();
 			using var transaction = await connection.BeginTransactionAsync();
-
 			// Get UniversityID
 			var user = await connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE UID = @UID", new { UID = adminId });
 			if (user == null || user.UniversityID == null)
 			{
 				return null;
 			}
-
 			rso.UniversityID = (int)user.UniversityID;
-
 			// Insert RSO into DB
 			rso.AdminID = adminId;
 			var numRowUpdated = await connection.ExecuteAsync("INSERT INTO RSOs (Name, Description, UniversityID, AdminID, Active) VALUES (@Name, @Description, @UniversityID, @AdminID, false)", rso);
-
 			if (numRowUpdated == 0)
 			{
 				return null;
 			}
-
 			// Get last inserted ID
 			var insertedId = await connection.QuerySingleAsync<int>("SELECT LAST_INSERT_ID()", transaction: transaction);
-
 			rso.RSOID = insertedId;
-
 			// Verify email existence
 			var emailVerifyTasks = new List<Task<User?>>();
-
 			foreach (var email in memberEmails)
 			{
 				var userRes = await connection.QueryFirstOrDefaultAsync<User>("SELECT * FROM users WHERE Email = @Email", new { Email = email });
@@ -54,7 +45,6 @@ public class SQLRSORepository(
 					return null;
 				}
 			}
-
 			// Add members
 			foreach (var email in memberEmails)
 			{
@@ -64,9 +54,7 @@ public class SQLRSORepository(
 					return null;
 				}
 			}
-
 			await transaction.CommitAsync();
-
 			return rso;
 		}
 		catch (Exception)
